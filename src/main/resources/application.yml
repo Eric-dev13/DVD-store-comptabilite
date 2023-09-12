@@ -1,0 +1,23 @@
+# ===============================================
+# = CONFIGURATION DU SERVER WEB EMBARQUE TOMCAT =
+# ===============================================
+server:
+  port: 9000
+
+spring:
+  # ============================================
+  # = CONFIGURATION DE LA SOURCE DE DONNEE MySQL =
+  # ============================================
+  datasource:
+    url: jdbc:mysql://localhost:3306/dvdstore
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+
+  # ===========================================================
+  # = CONFIGURATION DES PROPRIETES JPA (Java Persistence API) =
+  # ===========================================================
+  jpa:
+    hibernate:
+      ddl-auto: create    # Hibernate va créer le schéma de base de données à partir des entités annotées. À la fin de l'application, le schéma sera supprimé.
