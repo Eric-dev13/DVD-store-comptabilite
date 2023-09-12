@@ -1,18 +1,13 @@
 package com.simplon.dvdstore;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
 @Data
-@ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "dvdstore")
-public class DvdModel {
+public class DvdRepositoryModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incrémente
     private Long id;
@@ -22,4 +17,9 @@ public class DvdModel {
 
     @Column(name="genre")
     private String genre;
+
+    public DvdRepositoryModel(String name, String genre){
+        this.name = name;
+        this.genre = genre;
+    }
 }

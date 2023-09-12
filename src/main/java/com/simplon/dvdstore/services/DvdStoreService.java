@@ -1,6 +1,6 @@
 package com.simplon.dvdstore.services;
 
-import com.simplon.dvdstore.DvdModel;
+import com.simplon.dvdstore.DvdRepositoryModel;
 import com.simplon.dvdstore.repositories.DvdModelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,12 @@ public class DvdStoreService {
 
     private final DvdModelRepository dvdStoreRepository;
 
-    public DvdModel add(DvdModel dvdModel) {
+    public DvdRepositoryModel add(DvdRepositoryModel dvdModel) {
         return dvdStoreRepository.save(dvdModel);
     }
 
 
-    public Iterable<DvdModel> getAll() {
+    public Iterable<DvdRepositoryModel> getAll() {
         return dvdStoreRepository.findAll();
     }
 }

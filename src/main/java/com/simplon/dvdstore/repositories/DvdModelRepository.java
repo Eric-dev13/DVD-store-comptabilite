@@ -1,11 +1,11 @@
 package com.simplon.dvdstore.repositories;
 
-import com.simplon.dvdstore.DvdModel;
+import com.simplon.dvdstore.DvdRepositoryModel;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface DvdModelRepository extends CrudRepository<DvdModel, Long> {
+@Repository
+public interface DvdModelRepository extends CrudRepository<DvdRepositoryModel, Long> {
 //    List<DvdModel> findByLastName(String lastName);
 
 }

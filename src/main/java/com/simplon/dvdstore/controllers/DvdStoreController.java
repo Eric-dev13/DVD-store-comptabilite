@@ -1,6 +1,6 @@
 package com.simplon.dvdstore.controllers;
 
-import com.simplon.dvdstore.DvdModel;
+import com.simplon.dvdstore.DvdRepositoryModel;
 import com.simplon.dvdstore.services.DvdStoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +14,12 @@ public class DvdStoreController {
     private final DvdStoreService dvdStoreService;
 
     @GetMapping
-    public Iterable<DvdModel> getAll(){
+    public Iterable<DvdRepositoryModel> getAll(){
         return dvdStoreService.getAll();
     }
 
     @PostMapping
-    public DvdModel add(@RequestBody DvdModel dvdModel){
+    public DvdRepositoryModel add(@RequestBody DvdRepositoryModel dvdModel){
         return dvdStoreService.add(dvdModel);
     }
 
