@@ -1,5 +1,6 @@
 package com.simplon.dvdstore;
 
+import com.simplon.dvdstore.repositories.DvdStoreRepositoryModel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,10 +8,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+
 @Data
 public class DvdStoreModel {
-
-    List<DvdRepositoryModel> dvds = new ArrayList<>();
+    List<DvdStoreRepositoryModel> dvds = new ArrayList<>();
 }

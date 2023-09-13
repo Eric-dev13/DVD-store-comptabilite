@@ -21,3 +21,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none    # Hibernate va créer le schéma de base de données à partir des entités annotées. À la fin de l'application, le schéma sera supprimé.
+      show-sql: true
+      generate-ddl: true
+
