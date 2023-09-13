@@ -1,5 +1,6 @@
 package com.simplon.dvdstore.services;
 
+import com.simplon.dvdstore.controllers.DvdStoreDTO;
 import com.simplon.dvdstore.repositories.DvdRepository;
 import com.simplon.dvdstore.repositories.DvdStoreRepositoryModel;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -29,11 +31,15 @@ public class DvdStoreService {
 
         ArrayList<DvdStoreRepositoryModel> dvdStoreRepositoryModels = dvdStoreRepository.findAll();
         for(DvdStoreRepositoryModel dvdStoreRepositoryModel: dvdStoreRepositoryModels) {
-            dvdStoreServiceModels.add(new DvdStoreServiceModel(dvdStoreRepositoryModel.getName(),dvdStoreRepositoryModel.getGenre()));
+            dvdStoreServiceModels.add(new DvdStoreServiceModel(Optional.ofNullable(dvdStoreRepositoryModel.getId()),dvdStoreRepositoryModel.getName(),dvdStoreRepositoryModel.getGenre()));
         }
         // Mappage en dvdServiceModel
         return dvdStoreServiceModels;
     }
 
 
+    public DvdStoreServiceModel finById(Long id) {
+        Optional<DvdStoreRepositoryModel> DvdRepositoryModel = dvdStoreRepository.findById(id);
+       return new DvdStoreServiceModel(DvdRepositoryModel.get().getName(),DvdRepositoryModel.get().getGenre());
+    }
 }

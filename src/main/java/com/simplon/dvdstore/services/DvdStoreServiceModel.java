@@ -1,13 +1,14 @@
 package com.simplon.dvdstore.services;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
 public class DvdStoreServiceModel {
+    private Optional<Long> id;
     private String name;
     private String genre;
 
@@ -16,11 +17,10 @@ public class DvdStoreServiceModel {
         this.genre = genre;
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public String getGenre() {
-//        return genre;
-//    }
+    public DvdStoreServiceModel(Optional<Long> id, String name, String genre){
+        this.id = id;
+        this.name = name;
+        this.genre = genre;
+    }
+
 }
