@@ -6,7 +6,7 @@ import lombok.*;
 
 @NoArgsConstructor
 @Entity
-@Getter
+@Data
 @Table(name = "dvdstore")
 public class DvdStoreRepositoryModel {
     @Id
@@ -21,6 +21,12 @@ public class DvdStoreRepositoryModel {
 
 
     public DvdStoreRepositoryModel(String name, String genre){
+        this.name = name;
+        this.genre = genre;
+    }
+
+    public DvdStoreRepositoryModel(Long id, String name, String genre){
+        this.id = id;
         this.name = name;
         this.genre = genre;
     }

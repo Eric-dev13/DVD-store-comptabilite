@@ -21,15 +21,15 @@ public class DvdStoreService {
 
     public boolean addDvdStore(DvdStoreServiceModel dvdStoreServiceModel) {
        DvdStoreRepositoryModel modelRepository = new DvdStoreRepositoryModel(dvdStoreServiceModel.getName(),dvdStoreServiceModel.getGenre());
-        Object object =  dvdStoreRepository.save(modelRepository);
+        Object object = dvdStoreRepository.save(modelRepository);
         return object != null;
     }
 
-    public ArrayList<DvdStoreServiceModel> findAll() {
+    public List<DvdStoreServiceModel> findAll() {
         // Retourne un tableau
-        ArrayList<DvdStoreServiceModel> dvdStoreServiceModels = new ArrayList<>();
+        List<DvdStoreServiceModel> dvdStoreServiceModels = new ArrayList<>();
 
-        ArrayList<DvdStoreRepositoryModel> dvdStoreRepositoryModels = dvdStoreRepository.findAll();
+        List<DvdStoreRepositoryModel> dvdStoreRepositoryModels = dvdStoreRepository.findAll();
         for(DvdStoreRepositoryModel dvdStoreRepositoryModel: dvdStoreRepositoryModels) {
             dvdStoreServiceModels.add(new DvdStoreServiceModel(Optional.ofNullable(dvdStoreRepositoryModel.getId()),dvdStoreRepositoryModel.getName(),dvdStoreRepositoryModel.getGenre()));
         }
@@ -39,7 +39,49 @@ public class DvdStoreService {
 
 
     public DvdStoreServiceModel finById(Long id) {
-        Optional<DvdStoreRepositoryModel> DvdRepositoryModel = dvdStoreRepository.findById(id);
-       return new DvdStoreServiceModel(DvdRepositoryModel.get().getName(),DvdRepositoryModel.get().getGenre());
+        Optional<DvdStoreRepositoryModel> dvdRepositoryModel = dvdStoreRepository.findById(id);
+        if(dvdRepositoryModel.isEmpty())
+        {
+            return null;
+        } else {
+            return new DvdStoreServiceModel(dvdRepositoryModel.get().getName(),dvdRepositoryModel.get().getGenre());
+        }
+    }
+
+    public boolean delete(Long id) {
+        if(dvdStoreRepository.existsById(id)){
+            dvdStoreRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean patch(DvdStoreServiceModel dvdStoreServiceModel) {
+        Long id = dvdStoreServiceModel.getId().get();
+        if(dvdStoreRepository.existsById(id)){
+            DvdStoreRepositoryModel repositoryModel = new DvdStoreRepositoryModel();
+            repositoryModel.setId(id);
+            if(!dvdStoreServiceModel.getName().isBlank()){
+                repositoryModel.setName(dvdStoreServiceModel.getName());
+            }
+            if(!dvdStoreServiceModel.getGenre().isBlank()){
+                repositoryModel.setGenre(dvdStoreServiceModel.getGenre());
+            }
+
+            Object object = dvdStoreRepository.save(repositoryModel);
+            return object != null;
+        }
+        return false;
+    }
+
+    public boolean put(DvdStoreServiceModel dvdStoreServiceModel) {
+        Long id = dvdStoreServiceModel.getId().get();
+        if(dvdStoreRepository.existsById(id)){
+            DvdStoreRepositoryModel repositoryModel = new DvdStoreRepositoryModel(dvdStoreServiceModel.getId().get(),dvdStoreServiceModel.getName(),dvdStoreServiceModel.getGenre());
+
+            Object object = dvdStoreRepository.save(repositoryModel);
+            return object != null;
+        }
+        return false;
     }
 }
