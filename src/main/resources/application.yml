@@ -11,7 +11,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/dvdstore
     username: root
-    password: root
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
     initialization-mode: always
 
@@ -20,7 +20,7 @@ spring:
   # ===========================================================
   jpa:
     hibernate:
-      ddl-auto: none    # Hibernate va cr�er le sch�ma de base de donn�es � partir des entit�s annot�es. � la fin de l'application, le sch�ma sera supprim�.
+      ddl-auto: update
       show-sql: true
       generate-ddl: true
 

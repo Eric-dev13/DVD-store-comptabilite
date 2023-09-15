@@ -1,4 +1,4 @@
-package com.simplon.dvdstore.controllers;
+package com.simplon.dvdstore.controllers.dvd;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,4 +11,4 @@ import java.util.Optional;
 //    private String genre;
 //}
 
-public record DvdStoreDTO(String name, String genre){}
+public record DvdStoreDTO(String name, String genre, int quantity){}

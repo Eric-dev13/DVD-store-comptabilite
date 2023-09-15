@@ -1,9 +1,7 @@
-package com.simplon.dvdstore.services;
+package com.simplon.dvdstore.services.dvd;
 
-import com.simplon.dvdstore.controllers.DvdStoreDTO;
-import com.simplon.dvdstore.repositories.DvdRepository;
-import com.simplon.dvdstore.repositories.DvdStoreRepositoryModel;
-import lombok.RequiredArgsConstructor;
+import com.simplon.dvdstore.repositories.dvd.DvdRepository;
+import com.simplon.dvdstore.repositories.dvd.DvdStoreRepositoryModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +17,18 @@ public class DvdStoreService {
     private DvdRepository dvdStoreRepository;
 
 
-    public boolean addDvdStore(DvdStoreServiceModel dvdStoreServiceModel) {
-       DvdStoreRepositoryModel modelRepository = new DvdStoreRepositoryModel(dvdStoreServiceModel.getName(),dvdStoreServiceModel.getGenre());
-        Object object = dvdStoreRepository.save(modelRepository);
-        return object != null;
-    }
-
     public List<DvdStoreServiceModel> findAll() {
         // Retourne un tableau
         List<DvdStoreServiceModel> dvdStoreServiceModels = new ArrayList<>();
 
         List<DvdStoreRepositoryModel> dvdStoreRepositoryModels = dvdStoreRepository.findAll();
         for(DvdStoreRepositoryModel dvdStoreRepositoryModel: dvdStoreRepositoryModels) {
-            dvdStoreServiceModels.add(new DvdStoreServiceModel(Optional.ofNullable(dvdStoreRepositoryModel.getId()),dvdStoreRepositoryModel.getName(),dvdStoreRepositoryModel.getGenre()));
+            dvdStoreServiceModels.add(new DvdStoreServiceModel(
+                    Optional.ofNullable(dvdStoreRepositoryModel.getId()),
+                    dvdStoreRepositoryModel.getName(),
+                    dvdStoreRepositoryModel.getGenre(),
+                    dvdStoreRepositoryModel.getQuantity())
+            );
         }
         // Mappage en dvdServiceModel
         return dvdStoreServiceModels;
@@ -44,9 +41,20 @@ public class DvdStoreService {
         {
             return null;
         } else {
-            return new DvdStoreServiceModel(dvdRepositoryModel.get().getName(),dvdRepositoryModel.get().getGenre());
+            return new DvdStoreServiceModel(
+                    dvdRepositoryModel.get().getName(),
+                    dvdRepositoryModel.get().getGenre(),
+                    dvdRepositoryModel.get().getQuantity()
+            );
         }
     }
+
+    public boolean addDvdStore(DvdStoreServiceModel dvdStoreServiceModel) {
+       DvdStoreRepositoryModel modelRepository = new DvdStoreRepositoryModel(dvdStoreServiceModel.getName(),dvdStoreServiceModel.getGenre(),dvdStoreServiceModel.getQuantity());
+        Object object = dvdStoreRepository.save(modelRepository);
+        return object != null;
+    }
+
 
     public boolean delete(Long id) {
         if(dvdStoreRepository.existsById(id)){
@@ -67,6 +75,9 @@ public class DvdStoreService {
             if(!dvdStoreServiceModel.getGenre().isBlank()){
                 repositoryModel.setGenre(dvdStoreServiceModel.getGenre());
             }
+            if(dvdStoreServiceModel.getQuantity() > 0){
+                repositoryModel.setQuantity(dvdStoreServiceModel.getQuantity());
+            }
 
             Object object = dvdStoreRepository.save(repositoryModel);
             return object != null;
@@ -77,7 +88,12 @@ public class DvdStoreService {
     public boolean put(DvdStoreServiceModel dvdStoreServiceModel) {
         Long id = dvdStoreServiceModel.getId().get();
         if(dvdStoreRepository.existsById(id)){
-            DvdStoreRepositoryModel repositoryModel = new DvdStoreRepositoryModel(dvdStoreServiceModel.getId().get(),dvdStoreServiceModel.getName(),dvdStoreServiceModel.getGenre());
+            DvdStoreRepositoryModel repositoryModel = new DvdStoreRepositoryModel(
+                                                            dvdStoreServiceModel.getId().get(),
+                                                            dvdStoreServiceModel.getName(),
+                                                            dvdStoreServiceModel.getGenre(),
+                                                            dvdStoreServiceModel.getQuantity()
+                                                    );
 
             Object object = dvdStoreRepository.save(repositoryModel);
             return object != null;

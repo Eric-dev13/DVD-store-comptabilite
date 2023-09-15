@@ -1,11 +1,10 @@
 package com.simplon.dvdstore;
 
-import com.simplon.dvdstore.repositories.DvdRepository;
-import com.simplon.dvdstore.repositories.DvdStoreRepositoryModel;
+import com.simplon.dvdstore.repositories.dvd.DvdRepository;
+import com.simplon.dvdstore.repositories.dvd.DvdStoreRepositoryModel;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class DvdstoreApplication {
