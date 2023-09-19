@@ -1,13 +1,9 @@
 package com.simplon.dvdstore.services.clients;
 
-import com.simplon.dvdstore.controllers.clients.ClientDTO;
 import com.simplon.dvdstore.repositories.clients.ClientRepository;
-import com.simplon.dvdstore.repositories.clients.ClientRepositoryModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClientService {

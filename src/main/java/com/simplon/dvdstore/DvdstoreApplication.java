@@ -18,11 +18,11 @@ public class DvdstoreApplication {
 
 		return (args) -> {
 			// save a few customers
-			repository.save(new DvdStoreRepositoryModel("Jack", "Bauer"));
-			repository.save(new DvdStoreRepositoryModel("Chloe", "O'Brian"));
-			repository.save(new DvdStoreRepositoryModel("Kim", "Bauer"));
-			repository.save(new DvdStoreRepositoryModel("David", "Palmer"));
-			repository.save(new DvdStoreRepositoryModel("Michelle", "Dessler"));
+//			repository.save(new DvdStoreRepositoryModel("Jack", "Bauer"));
+//			repository.save(new DvdStoreRepositoryModel("Chloe", "O'Brian"));
+//			repository.save(new DvdStoreRepositoryModel("Kim", "Bauer"));
+//			repository.save(new DvdStoreRepositoryModel("David", "Palmer"));
+//			repository.save(new DvdStoreRepositoryModel("Michelle", "Dessler"));
 
 		};
 	}

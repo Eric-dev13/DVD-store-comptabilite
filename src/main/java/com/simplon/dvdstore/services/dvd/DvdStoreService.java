@@ -27,7 +27,9 @@ public class DvdStoreService {
                     Optional.ofNullable(dvdStoreRepositoryModel.getId()),
                     dvdStoreRepositoryModel.getName(),
                     dvdStoreRepositoryModel.getGenre(),
-                    dvdStoreRepositoryModel.getQuantity())
+                    dvdStoreRepositoryModel.getQuantity(),
+                    dvdStoreRepositoryModel.getPrice()
+                    )
             );
         }
         // Mappage en dvdServiceModel
@@ -44,13 +46,14 @@ public class DvdStoreService {
             return new DvdStoreServiceModel(
                     dvdRepositoryModel.get().getName(),
                     dvdRepositoryModel.get().getGenre(),
-                    dvdRepositoryModel.get().getQuantity()
+                    dvdRepositoryModel.get().getQuantity(),
+                    dvdRepositoryModel.get().getPrice()
             );
         }
     }
 
     public boolean addDvdStore(DvdStoreServiceModel dvdStoreServiceModel) {
-       DvdStoreRepositoryModel modelRepository = new DvdStoreRepositoryModel(dvdStoreServiceModel.getName(),dvdStoreServiceModel.getGenre(),dvdStoreServiceModel.getQuantity());
+       DvdStoreRepositoryModel modelRepository = new DvdStoreRepositoryModel(dvdStoreServiceModel.getName(),dvdStoreServiceModel.getGenre(),dvdStoreServiceModel.getQuantity(), dvdStoreServiceModel.getPrice());
         Object object = dvdStoreRepository.save(modelRepository);
         return object != null;
     }
@@ -64,26 +67,26 @@ public class DvdStoreService {
         return false;
     }
 
-    public boolean patch(DvdStoreServiceModel dvdStoreServiceModel) {
-        Long id = dvdStoreServiceModel.getId().get();
-        if(dvdStoreRepository.existsById(id)){
-            DvdStoreRepositoryModel repositoryModel = new DvdStoreRepositoryModel();
-            repositoryModel.setId(id);
-            if(!dvdStoreServiceModel.getName().isBlank()){
-                repositoryModel.setName(dvdStoreServiceModel.getName());
-            }
-            if(!dvdStoreServiceModel.getGenre().isBlank()){
-                repositoryModel.setGenre(dvdStoreServiceModel.getGenre());
-            }
-            if(dvdStoreServiceModel.getQuantity() > 0){
-                repositoryModel.setQuantity(dvdStoreServiceModel.getQuantity());
-            }
-
-            Object object = dvdStoreRepository.save(repositoryModel);
-            return object != null;
-        }
-        return false;
-    }
+//    public boolean patch(DvdStoreServiceModel dvdStoreServiceModel) {
+//        Long id = dvdStoreServiceModel.getId().get();
+//        if(dvdStoreRepository.existsById(id)){
+//            DvdStoreRepositoryModel repositoryModel = new DvdStoreRepositoryModel();
+//            repositoryModel.setId(id);
+//            if(!dvdStoreServiceModel.getName().isBlank()){
+//                repositoryModel.setName(dvdStoreServiceModel.getName());
+//            }
+//            if(!dvdStoreServiceModel.getGenre().isBlank()){
+//                repositoryModel.setGenre(dvdStoreServiceModel.getGenre());
+//            }
+//            if(dvdStoreServiceModel.getQuantity() > 0){
+//                repositoryModel.setQuantity(dvdStoreServiceModel.getQuantity());
+//            }
+//
+//            Object object = dvdStoreRepository.save(repositoryModel);
+//            return object != null;
+//        }
+//        return false;
+//    }
 
     public boolean put(DvdStoreServiceModel dvdStoreServiceModel) {
         Long id = dvdStoreServiceModel.getId().get();
@@ -92,7 +95,8 @@ public class DvdStoreService {
                                                             dvdStoreServiceModel.getId().get(),
                                                             dvdStoreServiceModel.getName(),
                                                             dvdStoreServiceModel.getGenre(),
-                                                            dvdStoreServiceModel.getQuantity()
+                                                            dvdStoreServiceModel.getQuantity(),
+                                                            dvdStoreServiceModel.getPrice()
                                                     );
 
             Object object = dvdStoreRepository.save(repositoryModel);

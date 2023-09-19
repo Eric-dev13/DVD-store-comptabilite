@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController // N'accepte que des données JSON ou XML
-@RequestMapping("api/dvdstore")
+@RequestMapping("api/dvd")
 public class DvdStoreController {
 
     // Via la constante (final) l'annotation @RequiredArgsConstructor Lombok va injecter le service dans le constructeur
@@ -30,7 +30,9 @@ public class DvdStoreController {
             dvdStoreDTOS.add(new DvdStoreDTO(
                                     dvdStoreServiceModel.getName(),
                                     dvdStoreServiceModel.getGenre(),
-                                    dvdStoreServiceModel.getQuantity())
+                                    dvdStoreServiceModel.getQuantity(),
+                                    dvdStoreServiceModel.getPrice()
+                    )
             );
         }
         return dvdStoreDTOS;
@@ -45,7 +47,8 @@ public class DvdStoreController {
                     dvdStoreServiceModel.getId().get(),
                     dvdStoreServiceModel.getName(),
                     dvdStoreServiceModel.getGenre(),
-                    dvdStoreServiceModel.getQuantity())
+                    dvdStoreServiceModel.getQuantity(),
+                    dvdStoreServiceModel.getPrice())
             );
         }
         return dvdStoreDtoWithOptions;
@@ -58,7 +61,8 @@ public class DvdStoreController {
             return new ResponseEntity<DvdStoreDTO>(new DvdStoreDTO(
                     dvdStoreServiceModel.getName(),
                     dvdStoreServiceModel.getGenre(),
-                    dvdStoreServiceModel.getQuantity()
+                    dvdStoreServiceModel.getQuantity(),
+                    dvdStoreServiceModel.getPrice()
             ), HttpStatus.OK);
         } else {
             //return new ResponseEntity<>("n'existe pas",HttpStatus.NOT_FOUND);
@@ -68,24 +72,25 @@ public class DvdStoreController {
 
     @PostMapping
     public boolean addDvdStore(@RequestBody DvdStoreDTO dvdStoreDTO) {
-        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(dvdStoreDTO.name(),dvdStoreDTO.genre(),dvdStoreDTO.quantity());
+        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(dvdStoreDTO.name(),dvdStoreDTO.genre(),dvdStoreDTO.quantity(),dvdStoreDTO.price());
         return dvdStoreService.addDvdStore(dvdStoreServiceModel);
     }
 
-    @PatchMapping("/{id}")
-    public boolean patch(@PathVariable("id") Long id, @RequestBody DvdStoreDTO dvdStoreDTO){
-        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(
-                                                            Optional.ofNullable(id),
-                                                            dvdStoreDTO.name(),
-                                                            dvdStoreDTO.genre(),
-                                                            dvdStoreDTO.quantity()
-                                                    );
-        return dvdStoreService.patch(dvdStoreServiceModel);
-    }
+//    @PatchMapping("/{id}")
+//    public boolean patch(@PathVariable("id") Long id, @RequestBody DvdStoreDTO dvdStoreDTO){
+//        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(
+//                                                            Optional.ofNullable(id),
+//                                                            dvdStoreDTO.name(),
+//                                                            dvdStoreDTO.genre(),
+//                                                            dvdStoreDTO.quantity(),
+//                                                            dvdStoreDTO.price()
+//                                                    );
+//        return dvdStoreService.patch(dvdStoreServiceModel);
+//    }
 
     @PutMapping("/{id}")
     public boolean put(@PathVariable("id") Long id, @RequestBody DvdStoreDTO dvdStoreDTO){
-        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(Optional.ofNullable(id),dvdStoreDTO.name(),dvdStoreDTO.genre(),dvdStoreDTO.quantity());
+        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(Optional.ofNullable(id),dvdStoreDTO.name(),dvdStoreDTO.genre(),dvdStoreDTO.quantity(), dvdStoreDTO.price());
         return dvdStoreService.put(dvdStoreServiceModel);
     }
 

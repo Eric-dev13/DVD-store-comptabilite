@@ -3,6 +3,7 @@ package com.simplon.dvdstore.controllers.dvd;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 //@Data
@@ -11,4 +12,4 @@ import java.util.Optional;
 //    private String genre;
 //}
 
-public record DvdStoreDTO(String name, String genre, int quantity){}
+public record DvdStoreDTO(String name, String genre, int quantity, BigDecimal price){}
