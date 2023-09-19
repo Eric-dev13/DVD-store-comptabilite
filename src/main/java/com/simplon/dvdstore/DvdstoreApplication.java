@@ -23,7 +23,6 @@ public class DvdstoreApplication {
 //			repository.save(new DvdStoreRepositoryModel("Kim", "Bauer"));
 //			repository.save(new DvdStoreRepositoryModel("David", "Palmer"));
 //			repository.save(new DvdStoreRepositoryModel("Michelle", "Dessler"));
-
 		};
 	}
 

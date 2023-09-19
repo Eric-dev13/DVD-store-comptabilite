@@ -1,5 +1,9 @@
 package com.simplon.dvdstore.controllers.ventes;
 
-public class VenteDTO {
+import com.simplon.dvdstore.controllers.clients.ClientGetDTO;
+import com.simplon.dvdstore.controllers.dvd.DvdStoreDtoWithOption;
 
-}
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+public record VenteDTO(BigDecimal price, ClientGetDTO clientGetDTO, DvdStoreDtoWithOption dvdGetDTO) { }
