@@ -10,6 +10,7 @@ import com.simplon.dvdstore.services.dvd.DvdStoreService;
 import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
 import com.simplon.dvdstore.services.ventes.VenteService;
 import com.simplon.dvdstore.services.ventes.VenteServiceModel;
+import com.simplon.dvdstore.services.ventes.VenteServiceModelNoObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,10 +51,10 @@ public class VenteController {
                     venteServiceModel.getDvdStoreServiceModel().getPrice()
             );
 
-
             venteGetDTOS.add(new VenteGetDTO(
                     venteServiceModel.getId().get(),
                     venteServiceModel.getDateAchat(),
+                    venteServiceModel.getQuantity(),
                     venteServiceModel.getPrice(),
                     clientGetDTO,
                     dvdStoreDtoWithOption
@@ -72,7 +73,14 @@ public class VenteController {
         DvdStoreServiceModel dvdStoreServiceModel  = new DvdStoreServiceModel();
         dvdStoreServiceModel.setId(Optional.ofNullable(venteDTO.dvdGetDTO().id()));
 
-        VenteServiceModel venteServiceModel = new VenteServiceModel(venteDTO.price(), clientServiceModel, dvdStoreServiceModel);
+        VenteServiceModel venteServiceModel = new VenteServiceModel(venteDTO.quantity() ,clientServiceModel, dvdStoreServiceModel);
         return venteService.addVente(venteServiceModel);
+    }
+
+    @PostMapping("/no-tranfert-object")
+    public boolean addVenteWithId(@RequestBody VenteDTONoObject venteDTONoObject) {
+
+       VenteServiceModelNoObject venteServiceModelNoObject = new VenteServiceModelNoObject(venteDTONoObject.quantity() , venteDTONoObject.client(), venteDTONoObject.dvd());
+        return venteService.addVenteNoObject(venteServiceModelNoObject);
     }
 }

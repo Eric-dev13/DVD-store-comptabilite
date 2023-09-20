@@ -12,4 +12,4 @@ import java.util.Optional;
 //    private String genre;
 //}
 
-public record DvdStoreDTO(String name, String genre, int quantity, BigDecimal price){}
+public record DvdStoreDTO(String name, String genre, int quantity, float price){}

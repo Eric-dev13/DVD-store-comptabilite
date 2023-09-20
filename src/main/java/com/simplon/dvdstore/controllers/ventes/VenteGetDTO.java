@@ -8,4 +8,4 @@ import com.simplon.dvdstore.controllers.dvd.DvdStoreDtoWithOption;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record VenteGetDTO(Long id,LocalDateTime dateAchat, BigDecimal price, ClientGetDTO clientGetDTO, DvdStoreDtoWithOption dvdGetDTO) { }
+public record VenteGetDTO(Long id,LocalDateTime dateAchat, int quantity, float price, ClientGetDTO clientGetDTO, DvdStoreDtoWithOption dvdGetDTO) { }

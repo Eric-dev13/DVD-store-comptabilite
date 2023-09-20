@@ -22,25 +22,17 @@ import java.util.Optional;
 public class VenteServiceModel {
     private Optional<Long> id;
     private LocalDateTime dateAchat;
-    private BigDecimal price;
+    private int quantity;
+    private float price;
     private ClientServiceModel clientServiceModel;
     private DvdStoreServiceModel dvdStoreServiceModel;
 
 
     // POST
-    public VenteServiceModel(BigDecimal price, ClientServiceModel clientServiceModel, DvdStoreServiceModel dvdStoreServiceModel) {
-        this.price = price;
+    public VenteServiceModel(int quantity, ClientServiceModel clientServiceModel, DvdStoreServiceModel dvdStoreServiceModel) {
+        this.quantity = quantity;
         this.clientServiceModel = clientServiceModel;
         this.dvdStoreServiceModel = dvdStoreServiceModel;
     }
-
-    // GET
-
-//    public VenteServiceModel(Optional<Long> id, LocalDateTime dateAchat, BigDecimal price, ClientServiceModel clientServiceModel, DvdStoreServiceModel dvdStoreServiceModel) {
-//        this.id = id;
-//        this.dateAchat = dateAchat;
-//        this.price = price;
-//        this.clientServiceModel = clientServiceModel;
-//        this.dvdStoreServiceModel = dvdStoreServiceModel;
-//    }
 }
+

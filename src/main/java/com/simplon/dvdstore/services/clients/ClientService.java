@@ -24,7 +24,7 @@ public class ClientService {
     }
 
     public ClientServiceModel findById(Long id) {
-        return clientServiceMapper.clientRepositoryToClientService(clientRepository.findById(id).get()) ;
+        return clientServiceMapper.clientRepositoryToClientService(clientRepository.findById(id).get());
     }
 
     public boolean deleteById(Long id) {

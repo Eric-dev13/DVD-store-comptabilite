@@ -2,8 +2,6 @@ package com.simplon.dvdstore.services.dvd;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 import java.util.Optional;
 
 @Data
@@ -13,16 +11,15 @@ public class DvdStoreServiceModel {
     private String name;
     private String genre;
     private int quantity;
-    private BigDecimal price;
+    private float price;
 
-    public DvdStoreServiceModel(String name, String genre, BigDecimal price){
+    public DvdStoreServiceModel(String name, String genre, float price){
         this.name = name;
         this.genre = genre;
         this.price = price;
     }
 
-
-    public DvdStoreServiceModel(String name, String genre, int quantity, BigDecimal price){
+    public DvdStoreServiceModel(String name, String genre, int quantity, float price){
         this.name = name;
         this.genre = genre;
         this.quantity = quantity;
@@ -30,8 +27,7 @@ public class DvdStoreServiceModel {
     }
 
 
-
-    public DvdStoreServiceModel(Optional<Long> id,String name, String genre, int quantity, BigDecimal price){
+    public DvdStoreServiceModel(Optional<Long> id,String name, String genre, int quantity, float price){
         this.id = id;
         this.name = name;
         this.genre = genre;

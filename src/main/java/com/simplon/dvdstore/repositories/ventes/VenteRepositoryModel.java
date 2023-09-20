@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Table(name="vente")
 public class VenteRepositoryModel {
 
@@ -27,8 +27,11 @@ public class VenteRepositoryModel {
     @Column(name = "date_achat")
     private LocalDateTime dateAchat;
 
+    @Column(name="quantity")
+    private int quantity;
+
     @Column(name = "prix")
-    private BigDecimal prix;
+    private float prix;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = true)
@@ -38,8 +41,19 @@ public class VenteRepositoryModel {
     @JoinColumn(name = "dvd_store_repository_model_id")
     private DvdStoreRepositoryModel dvdStoreRepositoryModel;
 
+    // POST
+    public VenteRepositoryModel(int quantity, float prix, ClientRepositoryModel clientRepositoryModel, DvdStoreRepositoryModel dvdStoreRepositoryModel) {
+        this.quantity = quantity;
+        this.prix = prix;
+        this.clientRepositoryModel = clientRepositoryModel;
+        this.dvdStoreRepositoryModel = dvdStoreRepositoryModel;
+    }
 
-    public VenteRepositoryModel(BigDecimal prix, ClientRepositoryModel clientRepositoryModel, DvdStoreRepositoryModel dvdStoreRepositoryModel) {
+    // Get
+    public VenteRepositoryModel(long id, LocalDateTime dateAchat, int quantity, float prix, ClientRepositoryModel clientRepositoryModel, DvdStoreRepositoryModel dvdStoreRepositoryModel) {
+        this.id = id;
+        this.dateAchat = dateAchat;
+        this.quantity = quantity;
         this.prix = prix;
         this.clientRepositoryModel = clientRepositoryModel;
         this.dvdStoreRepositoryModel = dvdStoreRepositoryModel;

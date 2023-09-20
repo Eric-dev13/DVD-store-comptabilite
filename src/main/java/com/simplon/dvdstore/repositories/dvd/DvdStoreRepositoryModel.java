@@ -28,19 +28,19 @@ public class DvdStoreRepositoryModel {
     private int quantity;
 
     @Column(name="price")
-    private BigDecimal price;
+    private float price;
 
     @OneToMany(mappedBy = "dvdStoreRepositoryModel", orphanRemoval = true)
     private Set<VenteRepositoryModel> venteRepositoryModels = new LinkedHashSet<>();
 
-    public DvdStoreRepositoryModel(String name, String genre, int quantity, BigDecimal price){
+    public DvdStoreRepositoryModel(String name, String genre, int quantity, float price){
         this.name = name;
         this.genre = genre;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public DvdStoreRepositoryModel(Long id, String name, String genre, int quantity, BigDecimal price){
+    public DvdStoreRepositoryModel(Long id, String name, String genre, int quantity, float price){
         this.id = id;
         this.name = name;
         this.genre = genre;
