@@ -1,9 +1,12 @@
 package com.simplon.dvdstore.services.clients;
 
 import com.simplon.dvdstore.repositories.clients.ClientRepository;
+import com.simplon.dvdstore.repositories.clients.ClientRepositoryModel;
+import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ClientService {
@@ -24,6 +27,11 @@ public class ClientService {
     }
 
     public ClientServiceModel findById(Long id) {
+        ClientRepositoryModel clientRepositoryModel = clientRepository.findById(id).get();
+//        Set<VenteRepositoryModel> venteRepositoryModel =  clientRepositoryModel.getVenteRepositoryModels();
+//        venteRepositoryModel.forEach((vente) -> {
+//            System.out.println(vente.toString());
+//        });
         return clientServiceMapper.clientRepositoryToClientService(clientRepository.findById(id).get());
     }
 

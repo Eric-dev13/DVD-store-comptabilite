@@ -89,6 +89,7 @@ public class VenteService {
         DvdStoreRepositoryModel dvdStoreRepositoryModel = dvdRepository.findById(venteServiceModelNoObject.getDvd()).get();
 
         // Gestion du stocke, si le nombre de dvd est superieur ou egal
+
         int dvdEnStocke = dvdStoreRepositoryModel.getQuantity();
         int quantiteCommande =  venteServiceModelNoObject.getQuantity();
 

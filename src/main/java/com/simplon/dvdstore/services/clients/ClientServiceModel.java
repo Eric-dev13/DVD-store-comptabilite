@@ -1,10 +1,12 @@
 package com.simplon.dvdstore.services.clients;
 
+import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Optional;
 
 @Data
@@ -15,6 +17,7 @@ public class ClientServiceModel {
     private String firstname;
     private String lastname;
     private String address;
+    private List<VenteRepositoryModel> achats;
 
 
     public ClientServiceModel(String lastname,String firstname, String address){

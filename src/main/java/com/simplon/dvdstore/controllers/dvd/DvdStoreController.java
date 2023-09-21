@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController // N'accepte que des données JSON ou XML
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("api/dvd")
 public class DvdStoreController {
 

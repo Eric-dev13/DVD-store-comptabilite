@@ -4,6 +4,16 @@
 server:
   port: 9000
 
+# ======================================
+# = CONFIGURATION DE LA JOURNALISATION =
+# ======================================
+logging:
+  level:
+    # Permet de voir dans la console le port utilisé par Tomcat au démarrage
+    org.springframework.boot.web.embedded.tomcat: INFO
+    root: INFO
+    com.api: DEBUG
+
 spring:
   # ============================================
   # = CONFIGURATION DE LA SOURCE DE DONNEE MySQL =
@@ -21,5 +31,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-      show-sql: true
-      generate-ddl: true
+    # Différer l’initialisation de notre source de données.
+#    defer-datasource-initialization: true
+    show-sql: true
+  #  Pour l’insertion de données via des données.sql, nous devons définir la propriété
+#  sql:
+#    init:
+#      mode: always
+
+
