@@ -31,9 +31,6 @@ public class ClientRepositoryModel {
     @OneToMany(mappedBy = "clientRepositoryModel", orphanRemoval = true)
     private Set<VenteRepositoryModel> venteRepositoryModels = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "clientRepositoryModel", orphanRemoval = true)
-    private Set<VenteRepositoryModel> testventeRepositoryModels = new LinkedHashSet<>();
-
     public ClientRepositoryModel(String lastname, String firstname, String address) {
         this.lastname = lastname;
         this.firstname = firstname;

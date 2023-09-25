@@ -34,16 +34,13 @@ public class VenteRepositoryModel {
     private float prix;
 
     @ManyToOne
-    @JoinColumn(name = "client_id", nullable = true)
+    @JoinColumn(name = "client_id")
     private ClientRepositoryModel clientRepositoryModel;
 
     @ManyToOne
     @JoinColumn(name = "dvd_id")
     private DvdStoreRepositoryModel dvdStoreRepositoryModel;
 
-    @ManyToOne
-    @JoinColumn(name = "testclient_repository_model_id")
-    private ClientRepositoryModel testclientRepositoryModel;
 
     // POST
     public VenteRepositoryModel(int quantity, float prix, ClientRepositoryModel clientRepositoryModel, DvdStoreRepositoryModel dvdStoreRepositoryModel) {

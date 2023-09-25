@@ -1,5 +1,7 @@
 package com.simplon.dvdstore.controllers.clients;
 
+import com.simplon.dvdstore.repositories.ventes.VenteRepository;
+import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
 import com.simplon.dvdstore.services.clients.ClientService;
 import com.simplon.dvdstore.services.clients.ClientServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,14 @@ public class ClientController {
 
     @Autowired
     private ClientDtoMapper clientDtoMapper;
+
+    @Autowired
+    private VenteRepository venteRepository;
+
+    @GetMapping("/ventes/{id}")
+    public List<VenteRepositoryModel> findAllVentesByClients(@PathVariable("id") Long id){
+        return venteRepository.findAllByClient(id);
+    }
 
 
     @GetMapping

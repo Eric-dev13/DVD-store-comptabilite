@@ -42,7 +42,8 @@ public class VenteController {
                     venteServiceModel.getDvdStoreServiceModel().getName(),
                     venteServiceModel.getDvdStoreServiceModel().getGenre(),
                     venteServiceModel.getDvdStoreServiceModel().getQuantity(),
-                    venteServiceModel.getDvdStoreServiceModel().getPrice()
+                    venteServiceModel.getDvdStoreServiceModel().getPrice(),
+                    venteServiceModel.getDvdStoreServiceModel().getFilename()
             );
 
             venteGetDTOS.add(new VenteGetDTO(

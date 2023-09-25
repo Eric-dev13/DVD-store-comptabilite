@@ -1,0 +1,38 @@
+<!-- CONTANIER MARGIN -->
+<div class="container">
+    <h1 class="fw-bold text-center text-green">DVD</h1>
+    <!-- CONTAINER FLEX -->
+    <div class="d-flex flex-wrap">
+
+        <div class="card m-3" style="max-width: 500px;" *ngFor="let dvd of dvdDTO">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <img [src]="dvd.filename" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-7 d-flex flex-column">
+                    <div class="card-body border">
+                        <h5 class="h3 card-title text-center fw-bold mb-5">{{dvd.name}}</h5>
+                        <p class="text-center fw-bold  mb-5">{{dvd.genre}}</p>
+                        <p  class="text-center"> <a [routerLink]="['/dvd', dvd.id]">Voir en détail</a></p>
+                    </div>
+                    <div class="card-footer text-body-secondary align-items-end"
+                        [ngClass]="dvd.quantity <= 5 ? 'text-red' : 'text-green'">
+                        {{dvd.quantity}} en stock
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- CARD -->
+        <!-- <div class="card me-2" style="width: 18rem;" *ngFor="let dvd of dvdDTO" [routerLink]="">
+            <img [src]="dvd.filename" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="h3 card-title text-center fw-bold mb-3">{{dvd.name}}</h5>
+                <p class="text-center fw-bold mb-3">{{dvd.genre}}</p>
+                <p  class="text-center"> <a [routerLink]="['/dvd', dvd.id]">Voir en détail</a></p>
+            </div>
+            <div class="card-footer" [ngClass]="dvd.quantity <= 5 ? 'text-red' : 'text-green'">
+                {{dvd.quantity}} en stock
+            </div>
+        </div> -->
+    </div>
+</div>

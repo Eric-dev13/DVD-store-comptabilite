@@ -28,9 +28,10 @@ public class DvdStoreRepositoryModel {
     private int quantity;
 
     @Column(name="price")
+
     private float price;
 
-    @Column(name= "filename")
+    @Column(name= "filename", columnDefinition = "LONGTEXT")
     private String filename;
 
     @OneToMany(mappedBy = "dvdStoreRepositoryModel", orphanRemoval = true)

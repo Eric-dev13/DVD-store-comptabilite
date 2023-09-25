@@ -45,6 +45,7 @@ public class DvdStoreService {
             return null;
         } else {
             return new DvdStoreServiceModel(
+                    Optional.ofNullable(dvdRepositoryModel.get().getId()),
                     dvdRepositoryModel.get().getName(),
                     dvdRepositoryModel.get().getGenre(),
                     dvdRepositoryModel.get().getQuantity(),

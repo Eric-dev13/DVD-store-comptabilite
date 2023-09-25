@@ -35,6 +35,14 @@ public class DvdStoreServiceModel {
         this.filename = filename;
     }
 
+    public DvdStoreServiceModel(Optional<Long> id,String name, String genre, int quantity, float price){
+        this.id = id;
+        this.name = name;
+        this.genre = genre;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
 
     public DvdStoreServiceModel(Optional<Long> id,String name, String genre, int quantity, float price, String filename){
         this.id = id;

@@ -12,10 +12,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
-import { DvdsComponent } from './pages/dvds/dvds.component';
-import { DvdComponent } from './pages/dvd/dvd.component';
-import { ClientsComponent } from './pages/clients/clients.component';
-import { ClientComponent } from './pages/client/client.component';
+import { DvdsComponent } from './pages/dvds/dvds/dvds.component';
+import { DvdComponent } from './pages/dvds/dvd/dvd.component';
+import { ClientsComponent } from './pages/clients/clients/clients.component';
+import { ClientComponent } from './pages/clients/client/client.component';
 import { VentesComponent } from './pages/ventes/ventes.component';
 import { VenteComponent } from './pages/vente/vente.component';
 

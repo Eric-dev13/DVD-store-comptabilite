@@ -42,6 +42,7 @@ public class VenteService {
                 venteRepositoryModel.getClientRepositoryModel().getLastname(),
                 venteRepositoryModel.getClientRepositoryModel().getFirstname(),
                 venteRepositoryModel.getClientRepositoryModel().getAddress()
+
             );
 
             // Mappage venteRepositoryModel.getClientRepositoryModel To ClientServiceModel

@@ -30,13 +30,13 @@ spring:
   # ===========================================================
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     # Différer l’initialisation de notre source de données.
-#    defer-datasource-initialization: true
+    defer-datasource-initialization: true
     show-sql: true
   #  Pour l’insertion de données via des données.sql, nous devons définir la propriété
-#  sql:
-#    init:
-#      mode: always
+  sql:
+    init:
+      mode: always
 
 
