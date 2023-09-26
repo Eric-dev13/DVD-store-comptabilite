@@ -12,6 +12,8 @@ export class DvdsComponent implements OnInit {
 
   constructor(private dvdService: DvdService){}
 
+  readonly PUBLIC_API_URL = 'http://localhost:9000/upload/';
+
   dvdDTO: Array<DvdDTO> = [];
 
   ngOnInit(): void {

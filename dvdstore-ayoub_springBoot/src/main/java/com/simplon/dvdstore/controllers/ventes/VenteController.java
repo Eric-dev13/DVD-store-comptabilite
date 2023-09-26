@@ -1,6 +1,7 @@
 package com.simplon.dvdstore.controllers.ventes;
 
 import com.simplon.dvdstore.controllers.clients.ClientGetDTO;
+import com.simplon.dvdstore.controllers.dvd.DvdDtoMapper;
 import com.simplon.dvdstore.controllers.dvd.DvdStoreGetDto;
 import com.simplon.dvdstore.services.clients.ClientServiceModel;
 import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
@@ -36,15 +37,15 @@ public class VenteController {
                     venteServiceModel.getClientServiceModel().getFirstname(),
                     venteServiceModel.getClientServiceModel().getAddress()
             );
-
-            DvdStoreGetDto dvdStoreGetDto = new DvdStoreGetDto(
-                    venteServiceModel.getDvdStoreServiceModel().getId().get(),
-                    venteServiceModel.getDvdStoreServiceModel().getName(),
-                    venteServiceModel.getDvdStoreServiceModel().getGenre(),
-                    venteServiceModel.getDvdStoreServiceModel().getQuantity(),
-                    venteServiceModel.getDvdStoreServiceModel().getPrice(),
-                    venteServiceModel.getDvdStoreServiceModel().getFilename()
-            );
+            DvdStoreGetDto dvdStoreGetDto = DvdDtoMapper.INSTANCE.dvdServiceModelToDvdGetDTO(venteServiceModel.getDvdStoreServiceModel());
+//            DvdStoreGetDto dvdStoreGetDto = new DvdStoreGetDto(
+//                    venteServiceModel.getDvdStoreServiceModel().getId().get(),
+//                    venteServiceModel.getDvdStoreServiceModel().getName(),
+//                    venteServiceModel.getDvdStoreServiceModel().getGenre(),
+//                    venteServiceModel.getDvdStoreServiceModel().getQuantity(),
+//                    venteServiceModel.getDvdStoreServiceModel().getPrice(),
+//                    venteServiceModel.getDvdStoreServiceModel().getFilename()
+//            );
 
             venteGetDTOS.add(new VenteGetDTO(
                     venteServiceModel.getId().get(),

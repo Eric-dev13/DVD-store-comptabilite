@@ -1,0 +1,64 @@
+<main>
+  <div class="">
+    <ul class="">
+      <!--<li class="nav-item">
+              <a class="nav-link active" href="#">Genres</a>
+          </li>-->
+      <li class="nav-item">
+        <button class="nav-link" (click)="handleGenreClickButton('action')">
+          Action
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" (click)="handleGenreClickButton('adulte')">
+          Adulte
+        </button>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Animation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Comedy</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Documentary</a>
+      </li>
+      <li class="">
+        <button class="" (click)="handleGenreClickButton('Drama')">Drama</button>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Horror</a>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" (click)="handleGenreClickButton('Sci-fy')">Sci-Fy</button>
+      </li>
+      <li class="nav-item">
+        <img
+          src="assets/images/add.png"
+          alt="Browse more genre icon"
+          style="width: 30px"
+        />
+        <a class="nav-link" href="#">See More</a>
+      </li>
+    </ul>
+  </div>
+  <div class="movies-list">
+    <div class="movie-fiche" *ngFor="let dvd of dvdToShow; let index in dvdToShow ">
+      <a [href]="'/dvds/'+index">
+      <img [src]="dvd.imgPath" alt="Into The Wild DVD cover" />
+      <h2>
+        {{ dvd.name }}
+      </h2>
+      <h3>
+        {{ dvd.genre }}
+      </h3>
+      <img
+        src="assets/images/details.png"
+        alt="details icon"
+        style="width: 40px"
+      /></a>
+    </div>
+
+  </div>
+
+</main>

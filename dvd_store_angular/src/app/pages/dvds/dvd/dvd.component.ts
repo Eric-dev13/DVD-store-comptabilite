@@ -14,6 +14,8 @@ export class DvdComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private dvdService: DvdService){}
 
+  readonly PUBLIC_API_URL = 'http://localhost:9000/upload/';
+
   dvd!: DvdDTO;
 
   id_dvd: any;

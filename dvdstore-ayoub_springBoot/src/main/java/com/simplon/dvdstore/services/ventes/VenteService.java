@@ -7,6 +7,7 @@ import com.simplon.dvdstore.repositories.dvd.DvdStoreRepositoryModel;
 import com.simplon.dvdstore.repositories.ventes.VenteRepository;
 import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
 import com.simplon.dvdstore.services.clients.ClientServiceModel;
+import com.simplon.dvdstore.services.dvd.DvdServiceMapper;
 import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,13 +47,14 @@ public class VenteService {
             );
 
             // Mappage venteRepositoryModel.getClientRepositoryModel To ClientServiceModel
-            DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(
-                    Optional.ofNullable(venteRepositoryModel.getDvdStoreRepositoryModel().getId()),
-                    venteRepositoryModel.getDvdStoreRepositoryModel().getName(),
-                    venteRepositoryModel.getDvdStoreRepositoryModel().getGenre(),
-                    venteRepositoryModel.getDvdStoreRepositoryModel().getQuantity(),
-                    venteRepositoryModel.getDvdStoreRepositoryModel().getPrice()
-            );
+            DvdStoreServiceModel dvdStoreServiceModel = DvdServiceMapper.INSTANCE.DvdStoreRepositoryModelToDvdStoreServiceModel(venteRepositoryModel.getDvdStoreRepositoryModel());
+//            DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(
+//                    Optional.ofNullable(venteRepositoryModel.getDvdStoreRepositoryModel().getId()),
+//                    venteRepositoryModel.getDvdStoreRepositoryModel().getName(),
+//                    venteRepositoryModel.getDvdStoreRepositoryModel().getGenre(),
+//                    venteRepositoryModel.getDvdStoreRepositoryModel().getQuantity(),
+//                    venteRepositoryModel.getDvdStoreRepositoryModel().getPrice()
+//            );
 
             venteServiceModels.add(new VenteServiceModel(
                     Optional.ofNullable(venteRepositoryModel.getId()),

@@ -18,6 +18,7 @@ import { ClientsComponent } from './pages/clients/clients/clients.component';
 import { ClientComponent } from './pages/clients/client/client.component';
 import { VentesComponent } from './pages/ventes/ventes.component';
 import { VenteComponent } from './pages/vente/vente.component';
+import { FormDvdComponent } from './pages/dvds/form-dvd/form-dvd.component';
 
 
 
@@ -32,7 +33,8 @@ import { VenteComponent } from './pages/vente/vente.component';
     ClientsComponent,
     ClientComponent,
     VentesComponent,
-    VenteComponent
+    VenteComponent,
+    FormDvdComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
         <div class="card m-3" style="max-width: 500px;" *ngFor="let dvd of dvdDTO">
             <div class="row g-0">
                 <div class="col-md-5">
-                    <img [src]="dvd.filename" class="img-fluid rounded-start" alt="...">
+                    <img [src]="PUBLIC_API_URL + dvd.filename" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-7 d-flex flex-column">
                     <div class="card-body border">
