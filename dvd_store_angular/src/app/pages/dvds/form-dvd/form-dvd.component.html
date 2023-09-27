@@ -1,1 +1,50 @@
-<p>form-ddvd works!</p>
+<div class="container">
+    <form #form="ngForm" (submit)="send(form)" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input [(ngModel)]="dvd.name" name="name" type="text" class="form-control" id="name"
+                aria-describedby="name">
+        </div>
+        <div class="mb-3">
+            <select class="form-select" [(ngModel)]="dvd.genre" name="genre">
+                <option selected>Genre</option>
+                <option *ngFor="let genre of genres">{{genre}}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="realisateur" class="form-label">Réalisateur</label>
+            <input [(ngModel)]="dvd.realisateur" name="realisateur" type="text" class="form-control" id="realisateur"
+                aria-describedby="realisateur">
+
+        </div>
+        <div class="mb-3">
+            <label for="acteur" class="form-label">Acteur</label>
+            <input [(ngModel)]="dvd.acteur" name="acteur" type="text" class="form-control" id="acteur"
+                aria-describedby="acteur">
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantité</label>
+            <input [(ngModel)]="dvd.quantity" name="quantity" type="number" class="form-control" id="quantity"
+                aria-describedby="quantity">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Prix</label>
+            <input [(ngModel)]="dvd.price" name="price" type="number" class="form-control" id="price"
+                aria-describedby="price">
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Image</label>
+            <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)">
+        </div>
+        <div class="input-group flex-nowrap mb-3">
+            <!-- Affichage de l'image -->
+            <img *ngIf="selectedImage" [src]="selectedImage" alt="Image sélectionnée" height="200">
+        </div>
+        <div class="mb-3">
+            <label for="synopsis" class="form-label">synopsis</label>
+            <input [(ngModel)]="dvd.synopsis" name="synopsis" type="text" class="form-control" id="synopsis"
+                aria-describedby="synopsis">
+        </div>
+        <button type="submit" class="btn text-light btn-blue">Ajouter</button>
+    </form>
+</div>
