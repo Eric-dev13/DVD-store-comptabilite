@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DvdService } from 'src/app/services/dvd.service';
-import { DvdDTO } from 'src/app/pages/dvds/dvdDTO.interface';
+import { DvdModel } from 'src/app/services/dvd-model.interface';
+import { environment } from 'src/environments/environment.development';
+import { faEdit, faTrash, faCircleInfo, faRotateLeft, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,22 +13,36 @@ import { DvdDTO } from 'src/app/pages/dvds/dvdDTO.interface';
 })
 export class DvdsComponent implements OnInit {
 
-  constructor(private dvdService: DvdService){}
+  constructor(private dvdService: DvdService, private router: Router) { }
 
-  readonly PUBLIC_API_URL = 'http://localhost:9000/upload/';
+  faSquarePlus = faSquarePlus;
+  faTrash = faTrash;
+  faEdit = faEdit;
+  faCircleInfo = faCircleInfo;
 
-  dvdDTO: Array<DvdDTO> = [];
+  readonly PUBLIC_URL_UPLOAD: string = environment.PUBLIC_URL_UPLOAD;
+
+  dvdModel: Array<DvdModel> = [];
 
   ngOnInit(): void {
-    this.dvdService.findAllDvds().subscribe({
-      next: (data_dvds) => {
-        console.table(data_dvds),
-        this.dvdDTO = data_dvds
+    this.findAll();
+  }
+
+  delete = (id: any) => {
+    this.dvdService.delete(id).subscribe((res) => {
+      this.findAll();
+      console.log('delete', res)
+    })
+  }
+
+  findAll = () => {
+    this.dvdService.findAll().subscribe({
+      next: (data) => {
+        console.table(data),
+          this.dvdModel = data
       },
       error: (err) => console.log('Observer got an error: ' + err),
       complete: () => console.log('Liste des DVDs récupèrée')
     })
   }
-
-
 }

@@ -18,11 +18,11 @@ public class ClientRepositoryModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incrémente
     private Long id;
 
-    @Column(name = "lastname")
-    private String lastname;
-
     @Column(name = "firstname")
     private String firstname;
+
+    @Column(name = "lastname")
+    private String lastname;
 
     @Column(name = "address")
     private String address;
@@ -31,13 +31,13 @@ public class ClientRepositoryModel {
     @OneToMany(mappedBy = "clientRepositoryModel", orphanRemoval = true)
     private Set<VenteRepositoryModel> venteRepositoryModels = new LinkedHashSet<>();
 
-    public ClientRepositoryModel(String lastname, String firstname, String address) {
+    public ClientRepositoryModel(String firstname, String lastname, String address) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.address = address;
     }
 
-    public ClientRepositoryModel( Long id,String lastname,String firstname,String address){
+    public ClientRepositoryModel( Long id, String firstname, String lastname, String address){
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;

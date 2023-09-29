@@ -1,39 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DvdServiceModel } from './dvd-service-model.interface';
+import { DvdModel } from './dvd-model.interface';
 import { NgForm } from '@angular/forms';
+import {environment} from 'src/environments/environment.development';
 
-
-// export interface DvdService {
-//   id?: number,
-//   name: string,
-//   genre: string,
-//   realisateur: string,
-//   quantity: number,
-//   price: number,
-//   filename: string,
-//   synopsis:string
-// }
 
 @Injectable({
   providedIn: 'root'
 })
 export class DvdService {
 
-  dvds: Array<DvdServiceModel> = [];
-
   constructor(private http: HttpClient) { }
 
-  findAllDvds = (): Observable<Array<DvdServiceModel>> => {
-    return this.http.get<Array<DvdServiceModel>>("http://localhost:9000/api/dvd");
+  readonly BASE_URL = environment.BASE_URL;
+
+  findAll = (): Observable<Array<DvdModel>> => {
+    return this.http.get<Array<DvdModel>>(this.BASE_URL + 'dvd');
   }
 
-  findById = (id:number): Observable<DvdServiceModel> => {
-    return this.http.get<DvdServiceModel>("http://localhost:9000/api/dvd/"+ id);
+  findById = (id:number): Observable<DvdModel> => {
+    return this.http.get<DvdModel>(this.BASE_URL + 'dvd/' + id);
   }
 
-  add = (form: NgForm): Observable<any> => {
-    return this.http.post("http://localhost:9000/api/dvd", form.value);
+  add = (formData: FormData): Observable<boolean> => {
+    return this.http.post<boolean>(this.BASE_URL + 'dvd', formData);
+  }
+
+  update = (id:number, formData: FormData): Observable<boolean> => {
+    return this.http.put<boolean>(this.BASE_URL + 'dvd/' + id, formData);
+  }
+
+  delete = (id:number): Observable<boolean> => {
+    return this.http.delete<boolean>(this.BASE_URL + 'dvd/' + id);
   }
 }

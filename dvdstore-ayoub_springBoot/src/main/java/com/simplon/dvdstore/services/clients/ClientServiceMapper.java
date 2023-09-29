@@ -11,11 +11,11 @@ import java.util.Optional;
 public class ClientServiceMapper {
 
     public ClientRepositoryModel clientServiceToClientRepository(ClientServiceModel clientServiceModel) {
-        return new ClientRepositoryModel(clientServiceModel.getLastname(),clientServiceModel.getFirstname(),clientServiceModel.getAddress());
+        return new ClientRepositoryModel(clientServiceModel.getFirstname(), clientServiceModel.getLastname(),clientServiceModel.getAddress());
     }
 
     public ClientRepositoryModel clientServiceToClientRepositoryWithId(ClientServiceModel clientServiceModel) {
-        return new ClientRepositoryModel(clientServiceModel.getId().get(),clientServiceModel.getLastname(),clientServiceModel.getFirstname(),clientServiceModel.getAddress());
+        return new ClientRepositoryModel(clientServiceModel.getId().get(), clientServiceModel.getFirstname(), clientServiceModel.getLastname(),clientServiceModel.getAddress());
     }
 
     public List<ClientRepositoryModel> listClientServiceToListClientRepository(List<ClientServiceModel> clientServiceModels){
@@ -23,13 +23,13 @@ public class ClientServiceMapper {
         List<ClientRepositoryModel> clientRepositoryModels = new ArrayList<>();
 
         for(ClientServiceModel clientServiceModel: clientServiceModels){
-            clientRepositoryModels.add(new ClientRepositoryModel(clientServiceModel.getLastname(),clientServiceModel.getFirstname(),clientServiceModel.getAddress()));
+            clientRepositoryModels.add(new ClientRepositoryModel(clientServiceModel.getFirstname(), clientServiceModel.getLastname(),clientServiceModel.getAddress()));
         }
         return clientRepositoryModels;
     }
 
     public ClientServiceModel clientRepositoryToClientService(ClientRepositoryModel clientRepositoryModel){
-        return new ClientServiceModel(Optional.ofNullable(clientRepositoryModel.getId()),clientRepositoryModel.getLastname(),clientRepositoryModel.getFirstname(),clientRepositoryModel.getAddress());
+        return new ClientServiceModel(Optional.ofNullable(clientRepositoryModel.getId()),clientRepositoryModel.getFirstname(),clientRepositoryModel.getLastname() ,clientRepositoryModel.getAddress());
     }
 
     public List<ClientServiceModel> listClientRepositoryToListClientService(List<ClientRepositoryModel> clientRepositoryModels){
@@ -37,7 +37,7 @@ public class ClientServiceMapper {
         List<ClientServiceModel> clientServiceModels = new ArrayList<>();
 
         for(ClientRepositoryModel clientRepositoryModel: clientRepositoryModels){
-            clientServiceModels.add(new ClientServiceModel(Optional.ofNullable(clientRepositoryModel.getId()),clientRepositoryModel.getLastname(),clientRepositoryModel.getFirstname(),clientRepositoryModel.getAddress()));
+            clientServiceModels.add(new ClientServiceModel(Optional.ofNullable(clientRepositoryModel.getId()),clientRepositoryModel.getFirstname(), clientRepositoryModel.getLastname(), clientRepositoryModel.getAddress()));
         }
         return clientServiceModels;
     }

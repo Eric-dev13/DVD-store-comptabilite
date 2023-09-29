@@ -1,6 +1,8 @@
 package com.simplon.dvdstore.controllers.dvd;
 
 import com.simplon.dvdstore.exceptions.DvdNotFoundException;
+import com.simplon.dvdstore.repositories.dvd.DvdRepository;
+import com.simplon.dvdstore.repositories.dvd.DvdStoreRepositoryModel;
 import com.simplon.dvdstore.services.dvd.DvdServiceMapper;
 import com.simplon.dvdstore.services.dvd.DvdStoreService;
 import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
@@ -8,7 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +26,6 @@ import java.util.stream.Collectors;
 //@CrossOrigin("http://localhost:4200")
 @RequestMapping("api/dvd")
 public class DvdStoreController {
-
-    // Via la constante (final) l'annotation @RequiredArgsConstructor Lombok va injecter le service dans le constructeur
 
     @Autowired
     private DvdStoreService dvdStoreService;
@@ -45,31 +51,65 @@ public class DvdStoreController {
         }
     }
 
-    @PostMapping
-    public boolean addDvdStore(@RequestBody DvdStoreDTO dvdStoreDTO) {
-        DvdStoreServiceModel dvdStoreServiceModel = DvdDtoMapper.INSTANCE.dvdGetDTOToDvdServiceModel(dvdStoreDTO);
-
-        // DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(dvdStoreDTO.name(),dvdStoreDTO.genre(),dvdStoreDTO.quantity(),dvdStoreDTO.price());
-        return dvdStoreService.addDvdStore(dvdStoreServiceModel);
-    }
-
-//    @PatchMapping("/{id}")
-//    public boolean patch(@PathVariable("id") Long id, @RequestBody DvdStoreDTO dvdStoreDTO){
-//        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(
-//                                                            Optional.ofNullable(id),
-//                                                            dvdStoreDTO.name(),
-//                                                            dvdStoreDTO.genre(),
-//                                                            dvdStoreDTO.quantity(),
-//                                                            dvdStoreDTO.price()
-//                                                    );
-//        return dvdStoreService.patch(dvdStoreServiceModel);
+//    @PostMapping("/add")
+//    public boolean addDvdStore(@RequestBody DvdStoreDTO dvdStoreDTO) {
+//        DvdStoreServiceModel dvdStoreServiceModel = DvdDtoMapper.INSTANCE.dvdGetDTOToDvdServiceModel(dvdStoreDTO);
+//        return dvdStoreService.addDvdStore(dvdStoreServiceModel);
 //    }
 
+    @PostMapping
+    public boolean addDvd(
+            @RequestPart("mediaFile") Optional<MultipartFile> mediaFile,
+            @RequestParam("name") String name,
+            @RequestParam("genre") String genre,
+            @RequestParam("realisateur") String realisateur,
+            @RequestParam("acteur") String acteur,
+            @RequestParam("quantity") int quantity,
+            @RequestParam("price") Float price,
+            @RequestParam("synopsis") String synopsis
+    ) throws IOException {
+
+        // MAPPAGE AVEC MapStruct
+        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(Optional.empty(),name,genre,realisateur,acteur,quantity,price,Optional.empty(),synopsis);
+
+        // Si un fichier a été envoyé.
+        if(!mediaFile.isEmpty()) {
+            if(dvdStoreService.fileUpload(mediaFile.get())){
+                // PERSISTANCE DES DONNEES EN BDD
+                dvdStoreServiceModel.setFilename(Optional.ofNullable(mediaFile.get().getOriginalFilename()));
+            }
+        }
+
+        // PERSISTANCE DES DONNEES EN BDD
+        return dvdStoreService.addDvd(dvdStoreServiceModel);
+
+    }
+
+
     @PutMapping("/{id}")
-    public boolean put(@PathVariable("id") Long id, @RequestBody DvdStoreDTO dvdStoreDTO){
-        DvdStoreServiceModel dvdStoreServiceModel = DvdDtoMapper.INSTANCE.dvdGetDTOToDvdServiceModel(dvdStoreDTO);
-        // DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(Optional.ofNullable(id),dvdStoreDTO.name(),dvdStoreDTO.genre(),dvdStoreDTO.quantity(), dvdStoreDTO.price());
-        return dvdStoreService.put(dvdStoreServiceModel);
+    public boolean put( @PathVariable("id") Long id,
+                        @RequestPart("mediaFile") Optional<MultipartFile> mediaFile,
+                        @RequestParam("name") String name,
+                        @RequestParam("genre") String genre,
+                        @RequestParam("realisateur") String realisateur,
+                        @RequestParam("acteur") String acteur,
+                        @RequestParam("quantity") int quantity,
+                        @RequestParam("price") Float price,
+                        @RequestParam("filename") String filename,
+                        @RequestParam("synopsis") String synopsis)throws IOException {
+        // MAPPAGE AVEC MapStruct
+        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(Optional.ofNullable(id),name,genre,realisateur,acteur,quantity,price,Optional.ofNullable(filename),synopsis);
+        // Si un fichier a été envoyé.
+        if(!mediaFile.isEmpty()) {
+            if(dvdStoreService.fileUpload(mediaFile.get())){
+                // MAPPAGE AVEC MapStruct
+                // PERSISTANCE DES DONNEES EN BDD
+                dvdStoreServiceModel.setFilename(Optional.ofNullable(mediaFile.get().getOriginalFilename()));
+            }
+        }
+
+        // PERSISTANCE DES DONNEES EN BDD
+        return dvdStoreService.updateDvd(dvdStoreServiceModel);
     }
 
     @DeleteMapping("{id}")

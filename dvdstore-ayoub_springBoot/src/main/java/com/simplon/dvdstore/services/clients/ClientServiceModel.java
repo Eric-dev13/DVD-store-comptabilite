@@ -20,13 +20,13 @@ public class ClientServiceModel {
     private List<VenteRepositoryModel> achats;
 
 
-    public ClientServiceModel(String lastname,String firstname, String address){
+    public ClientServiceModel(String firstname, String lastname, String address){
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
     }
 
-    public ClientServiceModel(Optional<Long> id, String lastname,String firstname, String address){
+    public ClientServiceModel(Optional<Long> id, String firstname, String lastname, String address){
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

@@ -7,23 +7,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DvdstoreApplication {
+public class DvdstoreApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DvdstoreApplication.class, args);
 	}
 
-	//@Bean
-	public CommandLineRunner demo(DvdRepository repository) {
-
-		return (args) -> {
-			// save a few customers
-//			repository.save(new DvdStoreRepositoryModel("Jack", "Bauer"));
-//			repository.save(new DvdStoreRepositoryModel("Chloe", "O'Brian"));
-//			repository.save(new DvdStoreRepositoryModel("Kim", "Bauer"));
-//			repository.save(new DvdStoreRepositoryModel("David", "Palmer"));
-//			repository.save(new DvdStoreRepositoryModel("Michelle", "Dessler"));
-		};
+	@Override
+	public void run(String... args) throws Exception {
+		System.out.println("Application démarré");
 	}
-
 }

@@ -23,14 +23,22 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+    #  exécute le fichier data.sql lors du démarrage de votre application: always / never
     initialization-mode: always
+    #  spécifiez le chemin du fichier data.sql dans l'application Spring Boot
+    #data: classpath:database.sql
+
+    servlet:
+      multipart:
+        max-file-size: 15MB
+        max-request-size: 15MB
 
   # ===========================================================
   # = CONFIGURATION DES PROPRIETES JPA (Java Persistence API) =
   # ===========================================================
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     # Différer l’initialisation de notre source de données.
     defer-datasource-initialization: true
     show-sql: true

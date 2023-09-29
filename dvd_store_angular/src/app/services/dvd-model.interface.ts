@@ -1,4 +1,4 @@
-export interface DvdServiceModel {
+export interface DvdModel {
     id?: number,
     name: string,
     genre: string,

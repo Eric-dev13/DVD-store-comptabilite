@@ -1,13 +1,25 @@
-<div class="container">
+<div class="container py-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-7 col-md-4 col-lg-3 text-center mb-3">
+            
+            <img *ngIf="dvd?.filename else default" [src]="PUBLIC_URL_UPLOAD + dvd.filename" class="img-fluid shadow"
+                alt="...">
+            <ng-template #default>
+                <img src="assets/empty_portrait.webp" class="img-fluid shadow" alt="...">
+            </ng-template>
+        </div>
+    </div>
+
     <form #form="ngForm" (submit)="send(form)" enctype="multipart/form-data">
+        <input [(ngModel)]="dvd.filename" name="filename" type="hidden" class="form-control" id="filename" aria-describedby="filename">
         <div class="mb-3">
             <label for="name" class="form-label">Nom</label>
             <input [(ngModel)]="dvd.name" name="name" type="text" class="form-control" id="name"
                 aria-describedby="name">
         </div>
         <div class="mb-3">
-            <select class="form-select" [(ngModel)]="dvd.genre" name="genre">
-                <option selected>Genre</option>
+            <label for="genre" class="form-label">Genre</label>
+            <select class="form-select" [(ngModel)]="dvd.genre" name="genre" id="genre">
                 <option *ngFor="let genre of genres">{{genre}}</option>
             </select>
         </div>
@@ -15,7 +27,6 @@
             <label for="realisateur" class="form-label">Réalisateur</label>
             <input [(ngModel)]="dvd.realisateur" name="realisateur" type="text" class="form-control" id="realisateur"
                 aria-describedby="realisateur">
-
         </div>
         <div class="mb-3">
             <label for="acteur" class="form-label">Acteur</label>
@@ -42,9 +53,10 @@
         </div>
         <div class="mb-3">
             <label for="synopsis" class="form-label">synopsis</label>
-            <input [(ngModel)]="dvd.synopsis" name="synopsis" type="text" class="form-control" id="synopsis"
-                aria-describedby="synopsis">
+            <textarea [(ngModel)]="dvd.synopsis" name="synopsis" type="text" class="form-control" id="synopsis"
+                aria-describedby="synopsis" rows="3"></textarea>
         </div>
+
         <button type="submit" class="btn text-light btn-blue">Ajouter</button>
     </form>
 </div>

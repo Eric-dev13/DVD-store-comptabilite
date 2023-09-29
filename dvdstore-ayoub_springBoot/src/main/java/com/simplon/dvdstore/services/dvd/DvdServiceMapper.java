@@ -3,6 +3,7 @@ package com.simplon.dvdstore.services.dvd;
 import com.simplon.dvdstore.repositories.dvd.DvdStoreRepositoryModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
@@ -13,28 +14,27 @@ public interface DvdServiceMapper {
     DvdServiceMapper INSTANCE = Mappers.getMapper(DvdServiceMapper.class);
 
     // POST ET PUT
-    @Mapping(source = "id", target = "id", qualifiedByName = "optionalLongToLong")
+    @Mappings({
+    @Mapping(source = "id", target = "id", qualifiedByName = "optionalToType"),
+    @Mapping(source = "filename", target = "filename", qualifiedByName = "optionalToType")
+    })
     DvdStoreRepositoryModel dvdStoreServiceModelToDvdStoreRepositoryModel (DvdStoreServiceModel dvdStoreServiceModel);
 
     // GET ALL et GET ONE
-    @Mapping(source = "id", target = "id", qualifiedByName = "LongToOptionalLong")
+    @Mappings({
+    @Mapping(source = "id", target = "id", qualifiedByName = "typeToOptional"),
+    @Mapping(source = "filename", target = "filename", qualifiedByName = "typeToOptional")
+    })
     DvdStoreServiceModel DvdStoreRepositoryModelToDvdStoreServiceModel(DvdStoreRepositoryModel dvdStoreRepositoryModel);
 
-
-    @Named("optionalLongToLong")
-    default Long optionalLongToLong(Optional<Long> source) throws Exception {
-        if (source == null) {
-            return null;
-            //throw new Exception("Id is null");
-        }
-        return source.get();
+    @Named("optionalToType")
+    default <T> T optionalToType(Optional<T> source) throws Exception {
+        return source.orElse(null);
     }
 
-    @Named("LongToOptionalLong")
-    default Optional<Long> LongToOptionalLong(Long source) throws Exception {
-        if (source == null) {
-            throw new Exception("Id is null");
-        }
+    @Named("typeToOptional")
+    default <T> Optional<T> typeToOptional(T source) throws Exception {
         return Optional.ofNullable(source);
     }
+
 }

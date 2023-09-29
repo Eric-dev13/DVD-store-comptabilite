@@ -1,38 +1,34 @@
 <!-- CONTANIER MARGIN -->
+<div class="d-flex justify-content-center align-items-center">
+    <a  routerLink="/dvd/nouveau"><fa-icon class="text-green fa-3x me-4" [icon]="faSquarePlus"></fa-icon></a>
+    <h1 class="fw-bold text-green">DVD</h1>
+</div>
 <div class="container">
-    <h1 class="fw-bold text-center text-green">DVD</h1>
-    <!-- CONTAINER FLEX -->
-    <div class="d-flex flex-wrap">
-
-        <div class="card m-3" style="max-width: 500px;" *ngFor="let dvd of dvdDTO">
+    <div class="d-flex flex-wrap justify-content-center">
+        <div class="card me-2 mb-2" style="width: 500px;" *ngFor="let dvd of dvdModel">
             <div class="row g-0">
-                <div class="col-md-5">
-                    <img [src]="PUBLIC_API_URL + dvd.filename" class="img-fluid rounded-start" alt="...">
+                <div class="col-md-4">
+                    <img *ngIf="dvd.filename; else default" [src]="PUBLIC_URL_UPLOAD + dvd.filename" class="img-fluid shadow" alt="...">
+                    <ng-template #default>
+                        <img  src="assets/empty_portrait.webp" class="img-fluid shadow" alt="...">
+                    </ng-template>
                 </div>
-                <div class="col-md-7 d-flex flex-column">
-                    <div class="card-body border">
-                        <h5 class="h3 card-title text-center fw-bold mb-5">{{dvd.name}}</h5>
-                        <p class="text-center fw-bold  mb-5">{{dvd.genre}}</p>
-                        <p  class="text-center"> <a [routerLink]="['/dvd', dvd.id]">Voir en détail</a></p>
+                <div class="col-md-8 d-flex flex-column">
+                    <div class="card-body flex-grow-1 justify-content-between">
+                        <h5 class="card-title text-center fw-bold">{{dvd.name}}</h5>
+                        <p class="text-center fw-bold">{{dvd.genre}}</p>
                     </div>
-                    <div class="card-footer text-body-secondary align-items-end"
+                    <div class="d-flex justify-content-center">
+                        <a [routerLink]="['/dvd', dvd.id]"><fa-icon class="text-info me-4" [icon]="faCircleInfo"></fa-icon></a>
+                        <a [routerLink]="['dvd/update/', dvd.id]"><fa-icon class="text-green me-4" [icon]="faEdit"></fa-icon></a>
+                        <button (click)="delete(dvd.id)" class=" border-0 bg-white"><fa-icon class="text-red" [icon]="faTrash"></fa-icon></button>
+                    </div>
+                    <div class="card-footer text-body-secondary"
                         [ngClass]="dvd.quantity <= 5 ? 'text-red' : 'text-green'">
                         {{dvd.quantity}} en stock
                     </div>
                 </div>
             </div>
         </div>
-        <!-- CARD -->
-        <!-- <div class="card me-2" style="width: 18rem;" *ngFor="let dvd of dvdDTO" [routerLink]="">
-            <img [src]="dvd.filename" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="h3 card-title text-center fw-bold mb-3">{{dvd.name}}</h5>
-                <p class="text-center fw-bold mb-3">{{dvd.genre}}</p>
-                <p  class="text-center"> <a [routerLink]="['/dvd', dvd.id]">Voir en détail</a></p>
-            </div>
-            <div class="card-footer" [ngClass]="dvd.quantity <= 5 ? 'text-red' : 'text-green'">
-                {{dvd.quantity}} en stock
-            </div>
-        </div> -->
     </div>
 </div>

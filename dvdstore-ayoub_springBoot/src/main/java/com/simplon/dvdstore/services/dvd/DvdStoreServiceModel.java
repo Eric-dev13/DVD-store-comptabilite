@@ -19,6 +19,18 @@ public class DvdStoreServiceModel {
     private String acteur;
     private int quantity;
     private float price;
-    private String filename;
+    private Optional<String> filename;
     private String synopsis;
+
+
+    public DvdStoreServiceModel(Optional<Long> id, String name, String genre, String realisateur, String acteur, int quantity, float price, String synopsis) {
+        this.id = id;
+        this.name = name;
+        this.genre = genre;
+        this.realisateur = realisateur;
+        this.acteur = acteur;
+        this.quantity = quantity;
+        this.price = price;
+        this.synopsis = synopsis;
+    }
 }

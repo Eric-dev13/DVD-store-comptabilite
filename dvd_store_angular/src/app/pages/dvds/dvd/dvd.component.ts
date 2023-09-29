@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DvdDTO } from 'src/app/pages/dvds/dvdDTO.interface';
+import { ActivatedRoute } from '@angular/router';
 import { DvdService } from 'src/app/services/dvd.service';
-
+import {environment} from 'src/environments/environment.development';
+import { DvdModel } from 'src/app/services/dvd-model.interface';
+import { faEdit, faTrash, faCircleInfo, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -14,9 +15,14 @@ export class DvdComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private dvdService: DvdService){}
 
-  readonly PUBLIC_API_URL = 'http://localhost:9000/upload/';
+  readonly PUBLIC_URL_UPLOAD = environment.PUBLIC_URL_UPLOAD;
 
-  dvd!: DvdDTO;
+  faSquarePlus=faSquarePlus;
+  faTrash=faTrash;
+  faEdit=faEdit;
+  faCircleInfo=faCircleInfo;
+
+  dvd!: DvdModel;
 
   id_dvd: any;
 
@@ -32,7 +38,12 @@ export class DvdComponent implements OnInit {
       error: (err) => console.log('Observer got an error: ' + err),
       complete: () => console.log('Liste des DVDs récupèrée')
     })
+  }
 
+  delete = (id: any) => {
+    this.dvdService.delete(id).subscribe((res) => {
+      console.log(res); 
+    })
   }
   
 }
