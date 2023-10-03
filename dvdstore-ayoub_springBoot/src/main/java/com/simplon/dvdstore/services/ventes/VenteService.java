@@ -11,6 +11,8 @@ import com.simplon.dvdstore.services.dvd.DvdServiceMapper;
 import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,14 +32,15 @@ public class VenteService {
     private  DvdRepository dvdRepository;
 
 
-
     public List<VenteServiceModel> findAll() {
 
         ArrayList<VenteRepositoryModel> venteRepositoryModels = venteRepository.findAll();
         ArrayList<VenteServiceModel> venteServiceModels = new ArrayList<>();
 
+        // Mapping
         for(VenteRepositoryModel venteRepositoryModel : venteRepositoryModels){
-            // Mappage venteRepositoryModel.getClientRepositoryModel To ClientServiceModel
+
+            // Mapping vente.client
             ClientServiceModel clientServiceModel = new ClientServiceModel(
                 Optional.ofNullable(venteRepositoryModel.getClientRepositoryModel().getId()),
                 venteRepositoryModel.getClientRepositoryModel().getLastname(),
@@ -46,7 +49,7 @@ public class VenteService {
 
             );
 
-            // Mappage venteRepositoryModel.getClientRepositoryModel To ClientServiceModel
+            // Mappage vente.dvd
             DvdStoreServiceModel dvdStoreServiceModel = DvdServiceMapper.INSTANCE.DvdStoreRepositoryModelToDvdStoreServiceModel(venteRepositoryModel.getDvdStoreRepositoryModel());
 //            DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(
 //                    Optional.ofNullable(venteRepositoryModel.getDvdStoreRepositoryModel().getId()),
@@ -67,6 +70,8 @@ public class VenteService {
         }
         return venteServiceModels;
     }
+
+
 
     public boolean addVente(VenteServiceModel venteServiceModel) {
 
@@ -121,4 +126,46 @@ public class VenteService {
     }
 
 
+    public boolean delete(Long id){
+        if(venteRepository.existsById(id)){
+            venteRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+
+    public VenteServiceModel finById(Long id) {
+       Optional<VenteRepositoryModel> venteRepositoryModel =  venteRepository.findById(id);
+
+       if (venteRepositoryModel.isPresent()){
+           VenteRepositoryModel vente = venteRepositoryModel.get();
+
+
+           // Mapping vente.client
+           ClientServiceModel clientServiceModel = new ClientServiceModel(
+                   Optional.ofNullable(vente.getClientRepositoryModel().getId()),
+                   vente.getClientRepositoryModel().getLastname(),
+                   vente.getClientRepositoryModel().getFirstname(),
+                   vente.getClientRepositoryModel().getAddress()
+           );
+
+           // Mapping vente.dvd
+           DvdStoreServiceModel dvdStoreServiceModel = DvdServiceMapper.INSTANCE.DvdStoreRepositoryModelToDvdStoreServiceModel(vente.getDvdStoreRepositoryModel());
+
+           //Mapping vente
+          return new VenteServiceModel(
+                  Optional.ofNullable(vente.getId()),
+                  vente.getDateAchat(),
+                  vente.getQuantity(),
+                  vente.getPrix(),
+                  clientServiceModel,
+                  dvdStoreServiceModel
+           );
+
+//           return VenteServiceMapper.INSTANCE.venteRepositoryModelToVenteServiceModel(venteRepositoryModel.get());
+
+       }
+       return null;
+    }
 }

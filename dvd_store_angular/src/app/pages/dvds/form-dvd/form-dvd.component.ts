@@ -40,8 +40,6 @@ export class FormDvdComponent implements OnInit {
   genreEnum = GenreEnum;
   genres: Array<string> = [];
 
-  // media!: MediaInterface;
-
   selectedFile!: File;
   selectedImage: any;
 

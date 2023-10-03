@@ -20,15 +20,6 @@ public class ClientController {
     @Autowired
     private ClientDtoMapper clientDtoMapper;
 
-    @Autowired
-    private VenteRepository venteRepository;
-
-    @GetMapping("/ventes/{id}")
-    public List<VenteRepositoryModel> findAllVentesByClients(@PathVariable("id") Long id){
-        return venteRepository.findAllByClient(id);
-    }
-
-
     @GetMapping
     public List<ClientGetDTO> findAll(){
         return clientDtoMapper.listClientServiceToListClientDto(clientService.findAll());

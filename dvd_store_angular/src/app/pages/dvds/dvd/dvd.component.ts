@@ -28,7 +28,6 @@ export class DvdComponent implements OnInit {
 
   ngOnInit(): void {
     this.id_dvd = this.route.snapshot.paramMap.get('id');
-    console.log(this.id_dvd);
 
     this.dvdService.findById(this.id_dvd).subscribe({
       next: (data_dvd) => {

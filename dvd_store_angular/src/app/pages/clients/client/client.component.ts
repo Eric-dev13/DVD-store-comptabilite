@@ -5,6 +5,8 @@ import { ClientService } from 'src/app/services/client.service';
 import {environment} from 'src/environments/environment.development';
 import { faEdit, faTrash, faCircleInfo, faRotateLeft, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 
+import { VenteService } from 'src/app/services/vente.service';
+import { VenteModel } from 'src/app/services/vente-model.interface';
 
 @Component({
   selector: 'app-client',
@@ -13,7 +15,10 @@ import { faEdit, faTrash, faCircleInfo, faRotateLeft, faSquarePlus } from '@fort
 })
 export class ClientComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private clientService: ClientService){}
+  constructor(private route: ActivatedRoute, 
+              private clientService: ClientService,
+              private venteService: VenteService
+              ){}
 
   faSquarePlus=faSquarePlus;
   faTrash=faTrash;
@@ -24,16 +29,29 @@ export class ClientComponent implements OnInit {
 
   client!: ClientModel;
 
+  // ventes!= VenteModel;
+  vente!: VenteModel;
+
   id_client: any;
 
   ngOnInit(): void {
     this.id_client = this.route.snapshot.paramMap.get('id');
     console.log(this.id_client);
 
+  
     this.clientService.findById(this.id_client).subscribe({
       next: (data) => {
         console.log(data),
         this.client = data
+      },
+      error: (err) => console.log('Observer got an error: ' + err),
+      complete: () => console.log('Client récupèrée')
+    })
+
+    this.venteService.findAllVenteByClient(this.id_client).subscribe({
+      next: (data) => {
+        console.table(data),
+        this.vente = data
       },
       error: (err) => console.log('Observer got an error: ' + err),
       complete: () => console.log('Client récupèrée')

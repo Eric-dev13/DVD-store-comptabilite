@@ -36,7 +36,7 @@ export class ClientsComponent implements OnInit {
   findAll = () => {
      this.clientService.findAll().subscribe({
       next: (data) => {
-        console.table(data),
+        // console.table(data),
         this.clientModel = data
       },
       error: (err) => console.log('Observer got an error: ' + err),

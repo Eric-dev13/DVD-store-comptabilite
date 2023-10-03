@@ -33,4 +33,5 @@ export class ClientService {
   delete = (id:number): Observable<boolean> => {
     return this.http.delete<boolean>(this.BASE_URL + 'clients/' + id);
   }
+
 }

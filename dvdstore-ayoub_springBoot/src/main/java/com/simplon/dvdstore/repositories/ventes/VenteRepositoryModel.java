@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @Table(name="vente")
 public class VenteRepositoryModel {
 
@@ -51,7 +51,7 @@ public class VenteRepositoryModel {
     }
 
     // Get
-    public VenteRepositoryModel(long id, LocalDateTime dateAchat, int quantity, float prix, ClientRepositoryModel clientRepositoryModel, DvdStoreRepositoryModel dvdStoreRepositoryModel, String filename) {
+    public VenteRepositoryModel(long id, LocalDateTime dateAchat, int quantity, float prix, ClientRepositoryModel clientRepositoryModel, DvdStoreRepositoryModel dvdStoreRepositoryModel) {
         this.id = id;
         this.dateAchat = dateAchat;
         this.quantity = quantity;

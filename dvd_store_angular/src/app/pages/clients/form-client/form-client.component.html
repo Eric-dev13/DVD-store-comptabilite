@@ -1,3 +1,6 @@
+<div class="d-flex justify-content-center align-items-center">
+    <h1 class="fw-bold text-green">Ajouter / modifier CLIENT</h1>
+</div>
 <div class="container py-3">
     <div class="row justify-content-center">
         <div class="col-12 col-sm-7 col-md-4 col-lg-3 text-center mb-3">
@@ -35,6 +38,8 @@
             <img *ngIf="selectedImage" [src]="selectedImage" alt="Image sélectionnée" height="200">
         </div> -->
 
-        <button type="submit" class="btn text-light btn-blue">Ajouter</button>
+        <button type="submit" class="btn btn-dark">
+            <fa-icon class="text-green fa-2x mx-4" [icon]="faCheck"></fa-icon>
+        </button>
     </form>
 </div>

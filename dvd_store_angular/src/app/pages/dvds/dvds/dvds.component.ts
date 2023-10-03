@@ -38,7 +38,7 @@ export class DvdsComponent implements OnInit {
   findAll = () => {
     this.dvdService.findAll().subscribe({
       next: (data) => {
-        console.table(data),
+        // console.table(data),
           this.dvdModel = data
       },
       error: (err) => console.log('Observer got an error: ' + err),

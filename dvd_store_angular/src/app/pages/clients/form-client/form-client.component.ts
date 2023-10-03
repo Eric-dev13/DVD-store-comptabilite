@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ClientModel } from 'src/app/services/client-model.interface';
 import { ClientService } from 'src/app/services/client.service';
 import { environment } from 'src/environments/environment.development';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -17,6 +18,8 @@ export class FormClientComponent implements OnInit {
   constructor(private clientService: ClientService, private router: Router, private route : ActivatedRoute){}
 
   PUBLIC_URL_UPLOAD = environment.PUBLIC_URL_UPLOAD;
+
+  faCheck=faCheck;
 
   id: any;
 
@@ -52,9 +55,9 @@ export class FormClientComponent implements OnInit {
   }
 
   send = (form: NgForm) => {
-    console.log(form.value)
+    console.log("form: ", form.value)
     this.id = this.route.snapshot.paramMap.get("id");
-    console.log(this.id)
+
     if (this.id != null){
       // mode Update
       console.log("Update")
