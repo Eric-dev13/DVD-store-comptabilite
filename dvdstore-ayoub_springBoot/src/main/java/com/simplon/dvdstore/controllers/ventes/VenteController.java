@@ -116,16 +116,15 @@ public class VenteController {
 
 
     // VENTE PAR CLIENTS
-//    @GetMapping("/client/{id}")
-//    public List<VenteGetDTO> findAllVenteByClient(@PathVariable("id") Long id){
-//        ArrayList<VenteRepositoryModel> venteRepositoryModels = venteRepository.findAllVenteByClient(id);
-//
-//        List<VenteServiceModel> venteServiceModels = venteRepositoryModels.stream().map(venteServiceMapper::venteRepositoryModelToVenteServiceModel).collect(Collectors.toList());
-//
-//        return venteServiceModels.stream().map(venteDtoMapper::venteServiceModelToVenteGetDTO).collect(Collectors.toList());
-//
-//
-//    }
+    @GetMapping("/client/{id}")
+    public List<VenteGetDTO> findAllVenteByClient(@PathVariable("id") Long id){
+        ArrayList<VenteRepositoryModel> venteRepositoryModels = venteRepository.findAllVenteByClient(id);
+
+        List<VenteServiceModel> venteServiceModels = venteRepositoryModels.stream().map((value) -> VenteServiceMapper.INSTANCE.venteRepositoryModelToVenteServiceModel(value)).collect(Collectors.toList());
+
+        return venteServiceModels.stream().map((value) ->VenteDtoMapper.INSTANCE.venteServiceModelToVenteGetDTO(value)).collect(Collectors.toList());
+
+    }
 
 
 //    @PostMapping("/object")
