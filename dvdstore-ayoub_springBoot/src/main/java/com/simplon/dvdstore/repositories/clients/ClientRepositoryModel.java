@@ -2,7 +2,6 @@ package com.simplon.dvdstore.repositories.clients;
 
 import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,17 +11,17 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="client")
+@Table(name = "client")
 public class ClientRepositoryModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incrémente
     private Long id;
 
-    @Column(name = "lastname")
-    private String lastname;
-
     @Column(name = "firstname")
     private String firstname;
+
+    @Column(name = "lastname")
+    private String lastname;
 
     @Column(name = "address")
     private String address;
@@ -31,21 +30,23 @@ public class ClientRepositoryModel {
     @OneToMany(mappedBy = "clientRepositoryModel", orphanRemoval = true)
     private Set<VenteRepositoryModel> venteRepositoryModels = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "clientRepositoryModel", orphanRemoval = true)
-    private Set<VenteRepositoryModel> testventeRepositoryModels = new LinkedHashSet<>();
+    public Set<VenteRepositoryModel> getVenteRepositoryModels() {
+        return this.venteRepositoryModels;
+    }
 
-    public ClientRepositoryModel(String lastname, String firstname, String address) {
+    public ClientRepositoryModel(String firstname, String lastname, String address) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.address = address;
     }
 
-    public ClientRepositoryModel( Long id,String lastname,String firstname,String address){
+    public ClientRepositoryModel(Long id, String firstname, String lastname, String address) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
         this.address = address;
     }
+
 
 
 }

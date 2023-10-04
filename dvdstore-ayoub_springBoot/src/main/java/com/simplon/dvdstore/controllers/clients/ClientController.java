@@ -1,5 +1,7 @@
 package com.simplon.dvdstore.controllers.clients;
 
+import com.simplon.dvdstore.repositories.ventes.VenteRepository;
+import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
 import com.simplon.dvdstore.services.clients.ClientService;
 import com.simplon.dvdstore.services.clients.ClientServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 @RequestMapping("api/clients")
 public class ClientController {
 
@@ -17,7 +19,6 @@ public class ClientController {
 
     @Autowired
     private ClientDtoMapper clientDtoMapper;
-
 
     @GetMapping
     public List<ClientGetDTO> findAll(){

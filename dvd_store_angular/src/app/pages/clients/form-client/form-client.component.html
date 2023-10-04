@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-center align-items-center">
+    <h1 class="fw-bold text-green">Ajouter / modifier CLIENT</h1>
+</div>
+<div class="container py-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-7 col-md-4 col-lg-3 text-center mb-3">
+            <!-- <input [(ngModel)]="dvd.filename" name="filename" type="hidden" class="form-control" id="filename"
+                aria-describedby="filename">
+            <img *ngIf="dvd?.filename else default" [src]="PUBLIC_URL_UPLOAD + dvd.filename" class="img-fluid shadow"
+                alt="...">
+            <ng-template #default> -->
+                <img src="assets/empty_portrait.webp" class="img-fluid shadow" alt="...">
+            <!-- </ng-template> -->
+        </div>
+    </div>
+
+    <form #form="ngForm" (submit)="send(form)" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input [(ngModel)]="client.lastname" name="lastname" type="text" class="form-control" id="lastname"
+                aria-describedby="name">
+        </div>
+        <div class="mb-3">
+            <label for="realisateur" class="form-label">Prénom</label>
+            <input [(ngModel)]="client.firstname" name="firstname" type="text" class="form-control" id="firstname"
+                aria-describedby="firstname">
+        </div>
+        <div class="mb-3">
+            <label for="acteur" class="form-label">Adresse</label>
+            <input [(ngModel)]="client.address" name="address" type="text" class="form-control" id="address"
+                aria-describedby="address">
+        </div>
+        <!-- <div class="mb-3">
+            <label for="formFile" class="form-label">Image</label>
+            <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)">
+        </div>
+        <div class="input-group flex-nowrap mb-3">
+            <img *ngIf="selectedImage" [src]="selectedImage" alt="Image sélectionnée" height="200">
+        </div> -->
+
+        <button type="submit" class="btn btn-dark">
+            <fa-icon class="text-green fa-2x mx-4" [icon]="faCheck"></fa-icon>
+        </button>
+    </form>
+</div>

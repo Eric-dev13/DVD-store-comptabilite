@@ -12,12 +12,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
-import { DvdsComponent } from './pages/dvds/dvds.component';
-import { DvdComponent } from './pages/dvd/dvd.component';
-import { ClientsComponent } from './pages/clients/clients.component';
-import { ClientComponent } from './pages/client/client.component';
-import { VentesComponent } from './pages/ventes/ventes.component';
-import { VenteComponent } from './pages/vente/vente.component';
+import { DvdsComponent } from './pages/dvds/dvds/dvds.component';
+import { DvdComponent } from './pages/dvds/dvd/dvd.component';
+import { ClientsComponent } from './pages/clients/clients/clients.component';
+import { ClientComponent } from './pages/clients/client/client.component';
+import { VentesComponent } from './pages/ventes/ventes/ventes.component';
+import { FormDvdComponent } from './pages/dvds/form-dvd/form-dvd.component';
+import { FormsModule } from '@angular/forms';
+import { FormClientComponent } from './pages/clients/form-client/form-client.component';
+import { FormVenteComponent } from './pages/ventes/form-vente/form-vente.component';
+
 
 
 
@@ -32,9 +36,12 @@ import { VenteComponent } from './pages/vente/vente.component';
     ClientsComponent,
     ClientComponent,
     VentesComponent,
-    VenteComponent
+    FormDvdComponent,
+    FormClientComponent,
+    FormVenteComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,

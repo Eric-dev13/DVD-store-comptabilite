@@ -1,8 +1,10 @@
 package com.simplon.dvdstore.repositories.dvd;
 
 import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
+import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
 import jakarta.persistence.*;
 import lombok.*;
+import org.mapstruct.Mapping;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashSet;
@@ -10,10 +12,11 @@ import java.util.Set;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
 @Table(name = "dvd")
-public class DvdStoreRepositoryModel {
+public class  DvdStoreRepositoryModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id auto-incrémente
     private Long id;
@@ -24,6 +27,12 @@ public class DvdStoreRepositoryModel {
     @Column(name="genre")
     private String genre;
 
+    @Column(name="realisateur")
+    String realisateur;
+
+    @Column(name="acteur")
+    private String acteur;
+
     @Column(name="quantity")
     private int quantity;
 
@@ -32,6 +41,9 @@ public class DvdStoreRepositoryModel {
 
     @Column(name= "filename")
     private String filename;
+
+    @Column(name= "synopsis", columnDefinition = "TEXT")
+    private String synopsis;
 
     @OneToMany(mappedBy = "dvdStoreRepositoryModel", orphanRemoval = true)
     private Set<VenteRepositoryModel> venteRepositoryModels = new LinkedHashSet<>();
@@ -52,6 +64,5 @@ public class DvdStoreRepositoryModel {
         this.price = price;
         this.filename = filename;
     }
-
 
 }

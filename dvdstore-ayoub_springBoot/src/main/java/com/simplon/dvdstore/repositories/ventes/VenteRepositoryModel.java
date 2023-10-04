@@ -3,9 +3,8 @@ package com.simplon.dvdstore.repositories.ventes;
 import com.simplon.dvdstore.repositories.clients.ClientRepositoryModel;
 import com.simplon.dvdstore.repositories.dvd.DvdStoreRepositoryModel;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @Table(name="vente")
 public class VenteRepositoryModel {
 
@@ -34,16 +33,13 @@ public class VenteRepositoryModel {
     private float prix;
 
     @ManyToOne
-    @JoinColumn(name = "client_id", nullable = true)
+    @JoinColumn(name = "client_id")
     private ClientRepositoryModel clientRepositoryModel;
 
     @ManyToOne
     @JoinColumn(name = "dvd_id")
     private DvdStoreRepositoryModel dvdStoreRepositoryModel;
 
-    @ManyToOne
-    @JoinColumn(name = "testclient_repository_model_id")
-    private ClientRepositoryModel testclientRepositoryModel;
 
     // POST
     public VenteRepositoryModel(int quantity, float prix, ClientRepositoryModel clientRepositoryModel, DvdStoreRepositoryModel dvdStoreRepositoryModel) {
@@ -54,7 +50,7 @@ public class VenteRepositoryModel {
     }
 
     // Get
-    public VenteRepositoryModel(long id, LocalDateTime dateAchat, int quantity, float prix, ClientRepositoryModel clientRepositoryModel, DvdStoreRepositoryModel dvdStoreRepositoryModel, String filename) {
+    public VenteRepositoryModel(long id, LocalDateTime dateAchat, int quantity, float prix, ClientRepositoryModel clientRepositoryModel, DvdStoreRepositoryModel dvdStoreRepositoryModel) {
         this.id = id;
         this.dateAchat = dateAchat;
         this.quantity = quantity;

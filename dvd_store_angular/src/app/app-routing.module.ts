@@ -1,22 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DvdsComponent } from './pages/dvds/dvds.component';
-import { DvdComponent } from './pages/dvd/dvd.component';
-import { VentesComponent } from './pages/ventes/ventes.component';
-import { VenteComponent } from './pages/vente/vente.component';
-import { ClientsComponent } from './pages/clients/clients.component';
-import { ClientComponent } from './pages/client/client.component';
 
+import { DvdsComponent } from './pages/dvds/dvds/dvds.component';
+import { DvdComponent } from './pages/dvds/dvd/dvd.component';
+import { FormDvdComponent } from './pages/dvds/form-dvd/form-dvd.component';
+
+import { ClientsComponent } from './pages/clients/clients/clients.component';
+import { ClientComponent } from './pages/clients/client/client.component';
+import { FormClientComponent } from './pages/clients/form-client/form-client.component';
+
+import { VentesComponent } from './pages/ventes/ventes/ventes.component';
+import { FormVenteComponent } from './pages/ventes/form-vente/form-vente.component';
 
 const routes: Routes = [
-  { path: "dvds", component: DvdsComponent }, // DVDS
-  { path: "dvd", component: DvdComponent }, // DVD
+  { path: "", component: DvdsComponent }, // DVDS
+  { path: "dvd/nouveau", component: FormDvdComponent }, // post
+  { path: "dvd/update/:id", component: FormDvdComponent }, // put-update
+  { path: "dvd/:id", component: DvdComponent }, // // get by id
 
-  { path: "clients", component: ClientsComponent }, // DVDS
-  { path: "client", component: ClientComponent }, // DVD
+  { path: "clients", component: ClientsComponent }, // CLIENTS
+  { path: "client/nouveau", component: FormClientComponent }, // post
+  { path: "client/update/:id", component: FormClientComponent }, // put-update
+  { path: "client/:id", component: ClientComponent }, // // get by id
 
-  { path: "ventes", component: VentesComponent }, // DVDS
-  { path: "vente", component: VenteComponent }, // DVD
+  { path: "ventes", component: VentesComponent }, // VENTES
+  { path: "vente/nouveau", component: FormVenteComponent }, // post
+  { path: "vente/update/:id", component: FormVenteComponent }, // put-update
 ];
 
 @NgModule({

@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-center align-items-center">
+    <a  routerLink="/vente/nouveau"><fa-icon class="text-green fa-3x me-4" [icon]="faSquarePlus"></fa-icon></a>
+    <h1 class="fw-bold text-green">VENTES</h1>
+</div>
+<div class="container">
+    <div class="d-flex flex-wrap justify-content-center">
+        <div class="card me-2 mb-2" style="width: 700px;" *ngFor="let vente of venteModel">
+            <div class="row g-0">
+                <div class="col-md-3">
+                    <img *ngIf="vente.dvd?.filename; else default"
+                        [src]="PUBLIC_URL_UPLOAD + vente.dvd?.filename" class="img-fluid shadow" alt="...">
+                    <ng-template #default>
+                        <img src="assets/empty_portrait.webp" class="img-fluid shadow" alt="...">
+                    </ng-template>
+                </div>
+                <div class="col-md-9 d-flex flex-column">
+                    <div class="card-body flex-grow-1">
+                        <p class="text-end">{{vente.dateAchat | date:'dd/MM/yyyy'}}</p>
+                        <h5 class="fw-bold">{{vente.dvd?.name}} acheté par {{vente.client?.lastname}}  {{vente.client?.firstname}}</h5>
+                        <p class="mb-3">{{vente.client?.address}}</p>
+                        <p><span class="fw-semibold">Cout total: </span>{{vente.price}} €</p>
+                        <p><span class="fw-semibold"> {{vente.quantity}}</span> exemplaire(s) vendu(s)</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a [routerLink]="['/vente/update/', vente.id]"><fa-icon class="text-green me-4" [icon]="faEdit"></fa-icon></a>
+                        <button (click)="delete(vente.id)" class=" border-0 bg-white"><fa-icon class="text-red" [icon]="faTrash"></fa-icon></button>
+                    </div>
+                    <div class="card-footer text-body-secondary"
+                        [ngClass]="vente.quantity <= 5 ? 'text-red' : 'text-green'">
+                        {{ vente.dvd?.quantity }} en stock
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

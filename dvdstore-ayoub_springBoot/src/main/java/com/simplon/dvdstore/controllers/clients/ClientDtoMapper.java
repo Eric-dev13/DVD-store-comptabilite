@@ -11,11 +11,11 @@ import java.util.Optional;
 public class ClientDtoMapper {
 
     public ClientServiceModel clientDtoToClientService(ClientDTO clientDTO){
-        return new ClientServiceModel(clientDTO.lastname(),clientDTO.firstname(),clientDTO.address());
+        return new ClientServiceModel(clientDTO.firstname(),clientDTO.lastname(),clientDTO.address());
     }
 
     public ClientServiceModel clientDtoToClientServiceWithId(Long id, ClientDTO clientDTO){
-        return new ClientServiceModel(Optional.ofNullable(id), clientDTO.lastname(),clientDTO.firstname(),clientDTO.address());
+        return new ClientServiceModel(Optional.ofNullable(id), clientDTO.firstname(), clientDTO.lastname(), clientDTO.address());
     }
 
     public List<ClientServiceModel> listClientDtoToListClientService(List<ClientDTO> clientDTOS){
@@ -23,13 +23,13 @@ public class ClientDtoMapper {
         List<ClientServiceModel> clientServiceModels = new ArrayList<>();
 
         for(ClientDTO clientDTO: clientDTOS){
-            clientServiceModels.add(new ClientServiceModel(clientDTO.lastname(),clientDTO.firstname(),clientDTO.address()));
+            clientServiceModels.add(new ClientServiceModel(clientDTO.firstname(), clientDTO.lastname(),clientDTO.address()));
         }
         return clientServiceModels;
     }
 
     public ClientGetDTO clientServiceToclientDto(ClientServiceModel clientServiceModel){
-        return new ClientGetDTO(clientServiceModel.getId().get(),clientServiceModel.getLastname(),clientServiceModel.getFirstname(),clientServiceModel.getAddress());
+        return new ClientGetDTO(clientServiceModel.getId().get(),clientServiceModel.getFirstname(), clientServiceModel.getLastname(),clientServiceModel.getAddress());
     }
 
     public List<ClientGetDTO> listClientServiceToListClientDto(List<ClientServiceModel> clientServiceModels){
@@ -37,7 +37,7 @@ public class ClientDtoMapper {
         List<ClientGetDTO> clientGetDTOS = new ArrayList<>();
 
         for(ClientServiceModel clientServiceModel: clientServiceModels){
-            clientGetDTOS.add(new ClientGetDTO(clientServiceModel.getId().get(),clientServiceModel.getLastname(),clientServiceModel.getFirstname(),clientServiceModel.getAddress()));
+            clientGetDTOS.add(new ClientGetDTO(clientServiceModel.getId().get(), clientServiceModel.getFirstname(), clientServiceModel.getLastname(),clientServiceModel.getAddress()));
         }
         return clientGetDTOS;
     }

@@ -6,6 +6,7 @@ import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -27,12 +28,16 @@ public class ClientService {
     }
 
     public ClientServiceModel findById(Long id) {
-        ClientRepositoryModel clientRepositoryModel = clientRepository.findById(id).get();
+        Optional<ClientRepositoryModel> clientRepositoryModel = clientRepository.findById(id);
+        if(clientRepositoryModel.isPresent()){
+            return clientServiceMapper.clientRepositoryToClientService(clientRepositoryModel.get());
+        }
+        return null;
 //        Set<VenteRepositoryModel> venteRepositoryModel =  clientRepositoryModel.getVenteRepositoryModels();
 //        venteRepositoryModel.forEach((vente) -> {
 //            System.out.println(vente.toString());
 //        });
-        return clientServiceMapper.clientRepositoryToClientService(clientRepository.findById(id).get());
+
     }
 
     public boolean deleteById(Long id) {

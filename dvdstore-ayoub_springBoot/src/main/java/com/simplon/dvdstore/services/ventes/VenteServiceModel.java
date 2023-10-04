@@ -29,11 +29,13 @@ VenteServiceModel {
     private DvdStoreServiceModel dvdStoreServiceModel;
 
 
+
     // POST
     public VenteServiceModel(int quantity, ClientServiceModel clientServiceModel, DvdStoreServiceModel dvdStoreServiceModel) {
         this.quantity = quantity;
         this.clientServiceModel = clientServiceModel;
         this.dvdStoreServiceModel = dvdStoreServiceModel;
     }
+
 }
 
