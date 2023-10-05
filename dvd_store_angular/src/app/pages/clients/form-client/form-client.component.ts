@@ -55,22 +55,22 @@ export class FormClientComponent implements OnInit {
   }
 
   send = (form: NgForm) => {
-    console.log("form: ", form.value)
+    //console.log("form: ", form.value)
     this.id = this.route.snapshot.paramMap.get("id");
 
     if (this.id != null){
       // mode Update
-      console.log("Update")
+      //console.log("Update")
       this.clientService.update(this.id, form.value).subscribe((response) => {
         this.router.navigate(["/clients"]);
-        console.log(response)
+        //console.log(response)
       });
     } else {
       // Mode Add
-      console.log("Add")
+     // console.log("Add")
       this.clientService.add(form.value).subscribe((response) => {
         this.router.navigate(["/clients"]);
-        console.log(response)
+        //console.log(response)
       });
     }
   }

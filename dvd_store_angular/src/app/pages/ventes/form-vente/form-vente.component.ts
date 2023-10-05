@@ -84,22 +84,22 @@ export class FormVenteComponent implements OnInit {
   }
 
   send = (form: NgForm) => {
-    console.log("form",form.value)
+    //console.log("form",form.value)
     this.id = this.route.snapshot.paramMap.get("id");
 
     if (this.id != null){
       // mode Update
-      console.log("Update")
+      //console.log("Update")
       this.venteService.update(this.id, form.value).subscribe((response) => {
         this.router.navigate(["/ventes"]);
-        console.log(response)
+        //console.log(response)
       });
     } else {
       // Mode Add
-      console.log("Add")
+      //console.log("Add")
       this.venteService.add(form.value).subscribe((response) => {
         this.router.navigate(["/ventes"]);
-        console.log(response)
+        //console.log(response)
       });
     }
   }

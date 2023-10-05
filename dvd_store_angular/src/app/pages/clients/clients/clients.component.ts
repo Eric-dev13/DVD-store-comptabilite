@@ -28,7 +28,7 @@ export class ClientsComponent implements OnInit {
 
   delete = (id: any) => {
     this.clientService.delete(id).subscribe((res) => {
-      console.log(res); 
+      //console.log(res); 
       this.findAll();
     })
   }

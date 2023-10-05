@@ -1,6 +1,6 @@
 
 <div class="d-flex justify-content-center align-items-center">
-    <a  routerLink="/client/nouveau"><fa-icon class="text-green fa-3x me-4" [icon]="faSquarePlus"></fa-icon></a>
+    <a  routerLink="/admin/client/nouveau"><fa-icon class="text-green fa-3x me-4" [icon]="faSquarePlus"></fa-icon></a>
     <h1 class="fw-bold text-green">CLIENTS</h1>
 </div>
 <div class="container">
@@ -20,8 +20,8 @@
                         <p class="text-center fw-bold">{{client.address}}</p>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <a [routerLink]="['/client', client.id]"><fa-icon class="text-info me-4" [icon]="faCircleInfo"></fa-icon></a>
-                        <a [routerLink]="['/client/update/', client.id]"><fa-icon class="text-green me-4" [icon]="faEdit"></fa-icon></a>
+                        <a [routerLink]="['/admin/client', client.id]"><fa-icon class="text-info me-4" [icon]="faCircleInfo"></fa-icon></a>
+                        <a [routerLink]="['/admin/client/update/', client.id]"><fa-icon class="text-green me-4" [icon]="faEdit"></fa-icon></a>
                         <button (click)="delete(client.id)" class=" border-0 bg-white"><fa-icon class="text-red" [icon]="faTrash"></fa-icon></button>
                     </div>
                 </div>

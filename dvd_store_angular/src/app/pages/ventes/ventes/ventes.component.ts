@@ -31,7 +31,7 @@ export class VentesComponent implements OnInit {
   findAll = () => {
     this.venteService.findAll().subscribe({
       next: (data) => {
-        console.table(data),
+        // console.table(data),
           this.venteModel = data
       },
       error: (err) => console.log('Observer got an error: ' + err),
@@ -40,11 +40,11 @@ export class VentesComponent implements OnInit {
   }
 
   delete = (id: any) => {
-    console.log("delete", id);
+    // console.log("delete", id);
     
     this.venteService.delete(id).subscribe((res) => {
       this.findAll();
-      console.log('delete', res)
+      // console.log('delete', res)
     })
   }
 

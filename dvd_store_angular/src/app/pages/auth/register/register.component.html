@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center align-items-center">
+    <!-- <a  routerLink="/admin/client/nouveau"><fa-icon class="text-green fa-3x me-4" [icon]="faSquarePlus"></fa-icon></a> -->
+    <h1 class="fw-bold text-green">INSCRIPTION</h1>
+</div>
+
+<div class="container">
+    <form #form="ngForm" (submit)="send(form)" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input ngModel name="username" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input ngModel name="password" type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
+</div>
