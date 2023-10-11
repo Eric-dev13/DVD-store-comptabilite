@@ -46,13 +46,13 @@ export class FormDvdComponent implements OnInit {
 
   ngOnInit(): void {
     this.genres = Object.values(this.genreEnum);
-    console.log(this.genres);
+    //console.log(this.genres);
 
     this.id = this.route.snapshot.paramMap.get("id");
     if (this.id != null) {
       this.dvdService.findById(this.id).subscribe({
         next: (data_dvd) => {
-          console.log(data_dvd),
+          //console.log(data_dvd),
             this.dvd = data_dvd
         },
         error: (err) => console.log('Observer got an error: ' + err),
@@ -68,7 +68,7 @@ export class FormDvdComponent implements OnInit {
 
   send = (form: NgForm) => {
     // CREE UNE INSTANCE DE FORM DATA POUR PREPARER LA REQUETE MULTIPART
-    console.log(form.value)
+    //console.log(form.value)
 
     const formData: FormData = new FormData();
     formData.append('mediaFile', this.selectedFile);
@@ -82,17 +82,17 @@ export class FormDvdComponent implements OnInit {
     formData.append('synopsis', form.value.synopsis);
 
     this.id = this.route.snapshot.paramMap.get("id");
-    console.log(this.id)
+    //console.log(this.id)
     if (this.id != null) {
       // mode Update
-      console.log("Update")
+      //console.log("Update")
       this.dvdService.update(this.id, formData).subscribe((response) => {
         console.log(response)
         this.router.navigate(["/"]);
       });
     } else {
       // Mode Add
-      console.log("Add")
+      //console.log("Add")
       this.dvdService.add(formData).subscribe((response) => {
         console.log(response)
         this.router.navigate(["/"]);

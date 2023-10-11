@@ -31,7 +31,7 @@ export class DvdComponent implements OnInit {
 
     this.dvdService.findById(this.id_dvd).subscribe({
       next: (data_dvd) => {
-        console.log(data_dvd),
+        //console.log(data_dvd),
         this.dvd = data_dvd
       },
       error: (err) => console.log('Observer got an error: ' + err),
@@ -41,7 +41,7 @@ export class DvdComponent implements OnInit {
 
   delete = (id: any) => {
     this.dvdService.delete(id).subscribe((res) => {
-      console.log(res); 
+      //console.log(res); 
     })
   }
   

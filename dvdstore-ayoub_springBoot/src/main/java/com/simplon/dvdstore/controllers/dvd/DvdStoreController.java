@@ -6,9 +6,13 @@ import com.simplon.dvdstore.repositories.dvd.DvdStoreRepositoryModel;
 import com.simplon.dvdstore.services.dvd.DvdServiceMapper;
 import com.simplon.dvdstore.services.dvd.DvdStoreService;
 import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @RestController // N'accepte que des données JSON ou XML
 //@CrossOrigin("http://localhost:4200")
@@ -36,6 +41,7 @@ public class DvdStoreController {
         return dvdStoreServiceModels.stream().map(DvdDtoMapper.INSTANCE::dvdServiceModelToDvdGetDTO).collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<DvdStoreGetDto> findById(@PathVariable("id") Long id) throws DvdNotFoundException {
         DvdStoreServiceModel dvdStoreServiceModel = dvdStoreService.finById(id);
@@ -46,7 +52,7 @@ public class DvdStoreController {
             // Créer et renvoyer une ResponseEntity avec le DvdGetDTO en tant que corps
             return ResponseEntity.ok(dvdStoreGetDto);
         } else {
-            //return new ResponseEntity<>("n'existe pas",HttpStatus.NOT_FOUND);
+            // return new ResponseEntity<>("n'existe pas",HttpStatus.NOT_FOUND);
             return ResponseEntity.notFound().build();
         }
     }

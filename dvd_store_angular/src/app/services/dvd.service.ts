@@ -31,6 +31,6 @@ export class DvdService {
   }
 
   delete = (id:number): Observable<boolean> => {
-    return this.http.delete<boolean>(this.BASE_URL + 'dvd/' + id);
+    return this.http.delete<boolean>(this.BASE_URL + 'dvd' + id);
   }
 }

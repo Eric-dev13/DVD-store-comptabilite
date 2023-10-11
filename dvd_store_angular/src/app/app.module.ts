@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './services/token.interceptor';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,7 +23,10 @@ import { FormDvdComponent } from './pages/dvds/form-dvd/form-dvd.component';
 import { FormsModule } from '@angular/forms';
 import { FormClientComponent } from './pages/clients/form-client/form-client.component';
 import { FormVenteComponent } from './pages/ventes/form-vente/form-vente.component';
-
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { UnauthorizedComponent } from './error/unauthorized/unauthorized.component';
+import { NotFoundComponent } from './error/not-found/not-found.component';
 
 
 
@@ -38,7 +43,11 @@ import { FormVenteComponent } from './pages/ventes/form-vente/form-vente.compone
     VentesComponent,
     FormDvdComponent,
     FormClientComponent,
-    FormVenteComponent
+    FormVenteComponent,
+    RegisterComponent,
+    LoginComponent,
+    UnauthorizedComponent,
+    NotFoundComponent
   ],
   imports: [
     FormsModule,
@@ -48,7 +57,13 @@ import { FormVenteComponent } from './pages/ventes/form-vente/form-vente.compone
     FontAwesomeModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

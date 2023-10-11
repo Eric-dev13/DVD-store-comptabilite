@@ -21,7 +21,7 @@
             <p class="h3">Nos ventes <span>.x. vendus</span></p>
         </div>
         <div class="d-flex justify-content-center mt-5">
-            <a [routerLink]="['/dvd/update/', dvd?.id]" >
+            <a [routerLink]="['/admin/dvd/update/', dvd?.id]" >
                 <fa-icon class="text-green me-4 fa-2x" [icon]="faEdit"></fa-icon>
             </a>
             <button (click)="delete(dvd?.id)" class="border-0 bg-white fa-2x">

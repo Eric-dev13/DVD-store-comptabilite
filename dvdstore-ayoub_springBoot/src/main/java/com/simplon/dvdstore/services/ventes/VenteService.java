@@ -33,7 +33,6 @@ public class VenteService {
 
 
     public List<VenteServiceModel> findAll() {
-
         ArrayList<VenteRepositoryModel> venteRepositoryModels = venteRepository.findAll();
         ArrayList<VenteServiceModel> venteServiceModels = new ArrayList<>();
 

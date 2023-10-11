@@ -36,12 +36,12 @@ export class ClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.id_client = this.route.snapshot.paramMap.get('id');
-    console.log(this.id_client);
+    //console.log(this.id_client);
 
   
     this.clientService.findById(this.id_client).subscribe({
       next: (data) => {
-        console.log(data),
+        //console.log(data),
         this.client = data
       },
       error: (err) => console.log('Observer got an error: ' + err),
@@ -60,7 +60,7 @@ export class ClientComponent implements OnInit {
 
   delete = (id: any) => {
     this.clientService.delete(id).subscribe((res) => {
-      console.log(res); 
+      //console.log(res); 
     })
   }
 

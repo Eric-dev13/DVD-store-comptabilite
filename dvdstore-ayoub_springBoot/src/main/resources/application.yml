@@ -47,4 +47,10 @@ spring:
     init:
       mode: always
 
+#"${jwt.signing.key}" = signingKey
+jwt:
+  signing:
+    key: signingKey
+
+
 
