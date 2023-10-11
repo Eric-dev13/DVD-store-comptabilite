@@ -90,7 +90,9 @@ public class JwtUserServiceImpl implements JwtUserService {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + 3600 * 1000);
         return
-                Jwts.builder().setSubject(user.getUsername()).setIssuedAt(now).setExpiration(expiryDate)
+                Jwts.builder().setSubject(user.getUsername())
+                        .setIssuedAt(now)
+                        .setExpiration(expiryDate)
                         .signWith(SignatureAlgorithm.HS512, signingKey)
                         .compact();
     }

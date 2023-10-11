@@ -4,21 +4,30 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { JwtTokenService } from './jwt-token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private jwtTokenService: JwtTokenService) { }
 
   readonly BASE_URL_AUTH = environment.BASE_URL_AUTH;
 
     // Méthode pour vérifier si un utilisateur est authentifié
     public isAuth = ():boolean => {
       const token = sessionStorage.getItem('token');
+      if(token){
+        this.jwtTokenService.setToken(token)
+        console.log(this.jwtTokenService.isTokenExpired());
+        
+        return !this.jwtTokenService.isTokenExpired();
+      }
+      return false;
+     
       // Si le token est présent, l'utilisateur est authentifié, sinon il ne l'est pas
-      return token !== null ? true : false;
+      // return token !== null ? true : false;
     }
 
     public setToken = (token:string) => {

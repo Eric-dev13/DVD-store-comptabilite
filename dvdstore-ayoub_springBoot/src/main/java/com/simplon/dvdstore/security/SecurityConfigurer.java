@@ -2,6 +2,7 @@ package com.simplon.dvdstore.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,7 +15,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-
 public class SecurityConfigurer {
     @Bean
     public SecurityFilter securityFilter() {
@@ -25,20 +25,22 @@ public class SecurityConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-// Standard pour les REST API
-        http = http.cors().and().csrf().disable();
-        http = http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
-// On place notre filter dans le middleware
-        http = http.addFilterBefore(securityFilter(),
-                UsernamePasswordAuthenticationFilter.class);
-// Si vous venez du web et souhaitez le faire dans le sens inverse
-// Détermination des endpoints privées
-        http = http.authorizeHttpRequests((r) ->
-                r.requestMatchers("/api/**").authenticated()
-                        .anyRequest().permitAll());
+        http
+        .cors()
+        .and()
+        .csrf().disable()
+        .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .addFilterBefore(securityFilter(), UsernamePasswordAuthenticationFilter.class)
+        .authorizeHttpRequests(a -> {
+            a.requestMatchers("/api/**").authenticated();
+            //a.requestMatchers("/api/dvd/**").hasAuthority("ADMIN");
+            a.anyRequest().permitAll();
+        });
+
         return http.build();
     }
 }

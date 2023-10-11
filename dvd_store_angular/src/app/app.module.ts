@@ -58,9 +58,11 @@ import { NotFoundComponent } from './error/not-found/not-found.component';
     HttpClientModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true}
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+  }
   ],
   bootstrap: [AppComponent]
 })

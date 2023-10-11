@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface CurrentUser {
   username: string,
@@ -22,7 +23,6 @@ export interface IsAuth {
 }
 
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -30,7 +30,7 @@ export interface IsAuth {
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService){}
+  constructor(private authenticationService: AuthenticationService, private router: Router){}
 
   user!: User;
   token!: Token;
@@ -42,12 +42,13 @@ export class RegisterComponent implements OnInit {
   send = (form: NgForm) => {
     this.authenticationService.register(form).subscribe({
       next: (data) => {
-        //console.log(data),
+        console.log("auth", data),
         this.token = data.token,
-        this.user = data.user
+        this.user = data.user,
+        this.router.navigate(["/"]);
       },
       error: (err) => console.log('Observer got an error: ' + err),
-      complete: () => console.log('Liste des DVDs récupèrée')
+      complete: () => console.log('S\'authentifier')
     })
   }
 
