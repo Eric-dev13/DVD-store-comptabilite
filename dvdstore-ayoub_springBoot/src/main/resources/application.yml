@@ -28,10 +28,10 @@ spring:
     #  spécifiez le chemin du fichier data.sql dans l'application Spring Boot
     #data: classpath:database.sql
 
-    servlet:
-      multipart:
-        max-file-size: 15MB
-        max-request-size: 15MB
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
 
   # ===========================================================
   # = CONFIGURATION DES PROPRIETES JPA (Java Persistence API) =
