@@ -1,8 +1,5 @@
 package com.simplon.dvdstore.cart.service;
 
-import com.simplon.dvdstore.cart.controller.PanierDto;
-import com.simplon.dvdstore.cart.controller.PanierDtoMapper;
-import com.simplon.dvdstore.cart.controller.PanierGetDto;
 import com.simplon.dvdstore.cart.repository.PanierRepositoryModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
