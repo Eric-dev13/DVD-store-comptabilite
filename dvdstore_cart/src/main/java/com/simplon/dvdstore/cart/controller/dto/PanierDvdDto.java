@@ -1,7 +1,11 @@
 package com.simplon.dvdstore.cart.controller.dto;
 
-public record PanierDvdDto(Long dvdId,
-                            int dvdQuantity,
-                            Float dvdPrice) {
+import com.simplon.dvdstore.cart.repository.PanierRepositoryModel;
+
+public record PanierDvdDto(Long id,
+                           Long dvdId,
+                           int dvdQuantity,
+                           Float dvdPrice,
+                           PanierRepositoryModel panier) {
 
 }
