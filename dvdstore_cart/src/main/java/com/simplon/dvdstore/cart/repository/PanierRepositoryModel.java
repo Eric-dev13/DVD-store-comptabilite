@@ -24,12 +24,11 @@ public class PanierRepositoryModel {
     private Long clientId;
 
     @OneToMany(mappedBy = "panier", orphanRemoval = true)
-    private List<PanierDvdRepositoryModel> paniers = new ArrayList<>();
+    private List<PanierDvdRepositoryModel> dvds = new ArrayList<>();
 
-
-    public PanierRepositoryModel(Long clientId) {
-        this.clientId = clientId;
-    }
+//    public PanierRepositoryModel(Long clientId) {
+//        this.clientId = clientId;
+//    }
 
     @PrePersist
     public void prePersist(){

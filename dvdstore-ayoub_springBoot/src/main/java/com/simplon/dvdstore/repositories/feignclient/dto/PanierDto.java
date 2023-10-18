@@ -1,10 +1,11 @@
-package com.simplon.dvdstore.cart.controller.dto;
+package com.simplon.dvdstore.repositories.feignclient.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.ArrayList;
 
 public record PanierDto(Long id,
                         LocalDateTime createdAt,
                         Float amount,
                         Long clientId,
-                        List<DvdDto> dvds) { }
+                        ArrayList<DvdDto> dvds
+                    ) { }

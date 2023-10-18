@@ -8,6 +8,8 @@ logging:
     com.api: DEBUG
 
 spring:
+  application:
+    name: microservice-panier
   datasource:
     url: jdbc:postgresql://localhost:5432/dvdstore_postgre
     username: postgres

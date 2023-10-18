@@ -10,4 +10,4 @@ public record PanierServiceModel(Long id,
                                  LocalDateTime createdAt,
                                  Float amount,
                                  Long clientId,
-                                 List<PanierDvdRepositoryModel> paniers) { }
+                                 List<PanierDvdRepositoryModel> dvds) { }

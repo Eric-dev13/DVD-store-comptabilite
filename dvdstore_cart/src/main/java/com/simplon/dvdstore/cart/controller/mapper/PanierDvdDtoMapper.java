@@ -17,7 +17,6 @@ public interface PanierDvdDtoMapper {
     PanierDvdServiceModel toService(PanierDvdDto panierDvdDto);
 
     /* <--- <--- GET ALL et GET ONE */
-//    PanierGetDto toDto(PanierDvdServiceModel panierDvdServiceModel);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     PanierDvdServiceModel partialUpdate(PanierDvdDto panierDvdDto, @MappingTarget PanierDvdServiceModel panierDvdServiceModel);

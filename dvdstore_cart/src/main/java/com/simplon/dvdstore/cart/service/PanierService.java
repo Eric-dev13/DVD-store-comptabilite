@@ -9,6 +9,9 @@ import com.simplon.dvdstore.cart.service.mapper.PanierDvdServiceMapper;
 import com.simplon.dvdstore.cart.service.mapper.PanierServiceMapper;
 import com.simplon.dvdstore.cart.service.model.PanierDvdServiceModel;
 import com.simplon.dvdstore.cart.service.model.PanierServiceModel;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +25,9 @@ public class PanierService {
 
     private final PanierRepository panierRepository;
     private final PanierDvdRepository panierDvdRepository;
+    private final EntityManager entityManager;
 
-    // RECUPERE TOUS LES PANIERS
+    // RETOURNE TOUS LES PANIERS
     public List<PanierServiceModel> findAll() {
         return panierRepository.findAll().stream().map((value)-> PanierServiceMapper.INSTANCE.toService(value)).collect(Collectors.toList());
     }
@@ -34,7 +38,7 @@ public class PanierService {
         return object != null;
     }
 
-    // RECUPERE UN PANIER
+    // RETOURNE UN PANIER
     public PanierServiceModel findById(Long id) {
         Optional<PanierRepositoryModel> panierRepositoryModel = panierRepository.findById(id);
         if(panierRepositoryModel.isPresent()){
@@ -57,16 +61,29 @@ public class PanierService {
 
         PanierDvdRepositoryModel newPanierDvdRepositoryModel =  panierDvdRepository.save(panierDvdRepositoryModel);
 
-        // Récupere l'id du nouvel enregistrement dvd-panier
-        //Long panierId = newPanierDvdRepositoryModel.getPanier().getId();
-
         // Retourne l'ID du panier
         Long panierId = panierDvdServiceModel.panier().getId();
 
-        // CALCULER LE TOTAL DU PANIER
-        panierRepository.updateAmoutCart(panierId);
+        // EXECUTER UNE PROCEDURE STOCKEE - CALCULER LE TOTAL DU PANIER
+        //panierRepository.updateAmountCart(panierId);
+
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("calcul_total_panier");
+        // Paramètres (si la procédure en a)
+        query.registerStoredProcedureParameter("panier_id", int.class, ParameterMode.IN);
+        query.setParameter("panier_id", panierId);
+
+        // Exécutez la procédure stockée
+        query.execute();
 
         return newPanierDvdRepositoryModel != null;
+    }
 
+    // SUPPRIMER UN PRODUIT DU PANIER
+    public boolean deleteById(Long id) {
+        if(panierDvdRepository.existsById(id)){
+            panierDvdRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

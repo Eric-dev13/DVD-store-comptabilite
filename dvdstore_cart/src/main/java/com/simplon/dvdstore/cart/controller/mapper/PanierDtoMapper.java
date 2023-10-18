@@ -14,7 +14,6 @@ public interface PanierDtoMapper {
 
 
     /* <--- <--- GET ALL et GET ONE */
-    @Mapping(source = "paniers", target="dvds")
     PanierDto toDto(PanierServiceModel panierServiceModel);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

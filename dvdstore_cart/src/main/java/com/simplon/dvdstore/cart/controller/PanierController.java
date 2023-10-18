@@ -20,21 +20,21 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/panier")
+@RequestMapping("/paniers")
 public class PanierController {
 
     private final PanierService panierService;
     private final PanierRepository panierRepository;
 
-    // RECUPERE TOUS LES PANIERS
+    // RETOURNE TOUS LES PANIERS
     @GetMapping
     public List<PanierDto> findAll(){
         List<PanierServiceModel> panierServiceModels =  panierService.findAll();
-        List<PanierDto> panierDto = panierServiceModels.stream().map((value)-> PanierDtoMapper.INSTANCE.toDto(value)).collect(Collectors.toList());
-        return panierDto;
+        List<PanierDto> panierDtos = panierServiceModels.stream().map((value)-> PanierDtoMapper.INSTANCE.toDto(value)).collect(Collectors.toList());
+        return panierDtos;
     }
 
-    // RECUPERE UN PANIER
+    // RETOURNE UN PANIER
     @GetMapping("/{id}")
     public PanierDto findById(@PathVariable Long id) {
         return PanierDtoMapper.INSTANCE.toDto(panierService.findById(id));
@@ -53,11 +53,12 @@ public class PanierController {
         return panierService.addNewDvd(panierDvdServiceModel);
     }
 
-    // CALCULER LE TOTAL DU PANIER
-    @PutMapping("/calcul/{id}")
-    public void updateAmoutCart(@PathVariable("id") Long id){
-        panierRepository.updateAmoutCart(id);
+    // SUPPRIMER UN PRODUIT DU PANIER
+    @DeleteMapping("/dvd")
+    public boolean deleteById(@PathVariable Long id){
+        return panierService.deleteById(id);
     }
+
 
 
 
