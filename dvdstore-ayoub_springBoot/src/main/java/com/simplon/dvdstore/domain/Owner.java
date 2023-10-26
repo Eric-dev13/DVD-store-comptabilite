@@ -1,5 +1,6 @@
 package com.simplon.dvdstore.domain;
 
+import com.simplon.dvdstore.repositories.clients.ClientRepositoryModel;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 
 
 @RestController // N'accepte que des données JSON ou XML
-//@CrossOrigin("http://localhost:4200")
 @RequestMapping("api/dvd")
 public class DvdStoreController {
 
@@ -41,7 +40,8 @@ public class DvdStoreController {
         return dvdStoreServiceModels.stream().map(DvdDtoMapper.INSTANCE::dvdServiceModelToDvdGetDTO).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //
+    // @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<DvdStoreGetDto> findById(@PathVariable("id") Long id) throws DvdNotFoundException {
         DvdStoreServiceModel dvdStoreServiceModel = dvdStoreService.finById(id);

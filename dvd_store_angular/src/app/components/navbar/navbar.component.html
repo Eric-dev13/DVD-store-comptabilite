@@ -1,6 +1,7 @@
+
 <nav class="navbar navbar-dark navbar-expand-md bg-blue text-white">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/admin"><img src="assets/Ellipse 1.png" alt=""></a>
+    <a class="navbar-brand" routerLink="/admin"><img src="assets/Ellipse 1.png" alt="logo" width="70"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -26,13 +27,16 @@
         <li class="nav-item">
           <a class="nav-link fs-3" routerLink="/admin/ventes"><img src="assets/acquisition.png" alt="" width="70"></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link fs-3" routerLink="paniers"><img src="assets/panier.png" alt="" width="70"></a>
+        </li>
       </ul>
     </div>
     <div class="d-flex">
       <ng-template [ngIf]="authenticationService.isAuth()" [ngIfElse]="login">
-        <button class="btn" (click)="logout()">
-        <img src="assets/O9IY340.jpg" class="rounded-circle me-2" alt="" width="70">
-      </button>
+        <button class="btn" (click)="logout()" data-bs-toggle="dropdown">
+          <img src="assets/O9IY340.jpg" class="rounded-circle me-2" alt="" width="70">
+        </button>
       </ng-template>
       <ng-template #login>
         <a routerLink="/login">

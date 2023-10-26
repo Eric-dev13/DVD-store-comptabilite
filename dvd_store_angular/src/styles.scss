@@ -1,3 +1,29 @@
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+
+@import "~@ionic/angular/css/normalize.css";
+
+@import "~@ionic/angular/css/structure.css";
+
+@import "~@ionic/angular/css/typography.css";
+
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+
+@import "~@ionic/angular/css/padding.css";
+
+@import "~@ionic/angular/css/float-elements.css";
+
+@import "~@ionic/angular/css/text-alignment.css";
+
+@import "~@ionic/angular/css/text-transformation.css";
+
+@import "~@ionic/angular/css/flex-utils.css";
+
+/* *********************************************************************** */
+
 /* You can add global styles to this file, and also import other style files */
 @import "./scss/bootstrap-init";
 
@@ -14,6 +40,7 @@
     src: url('assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf') format('truetype');
 }
 
+
 h1,h5{
     font-family: 'Playfair Display';
 }
@@ -21,3 +48,5 @@ h1,h5{
 p{
     font-family: 'Roboto Condensed Regular';
 }
+
+

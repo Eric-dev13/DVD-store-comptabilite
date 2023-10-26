@@ -1,0 +1,25 @@
+server:
+  port: 9001
+
+logging:
+  level:
+    org.springframework.boot.web.embedded.tomcat: INFO
+    root: INFO
+    com.api: DEBUG
+
+spring:
+  application:
+    name: microservice-panier
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dvdstore_postgre
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: never
