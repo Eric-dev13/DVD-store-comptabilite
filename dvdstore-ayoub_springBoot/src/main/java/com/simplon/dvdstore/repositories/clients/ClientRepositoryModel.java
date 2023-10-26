@@ -1,5 +1,6 @@
 package com.simplon.dvdstore.repositories.clients;
 
+import com.simplon.dvdstore.domain.Owner;
 import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class ClientRepositoryModel {
 
     @Column(name = "address")
     private String address;
+
 
     // Mapper avec nom propriété "clientRepositoryModel" de la classe "ModelVenteRepositoryModel"
     @OneToMany(mappedBy = "clientRepositoryModel", orphanRemoval = true)

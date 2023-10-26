@@ -66,14 +66,15 @@ public class PanierService {
 
         // EXECUTER UNE PROCEDURE STOCKEE - CALCULER LE TOTAL DU PANIER
         //panierRepository.updateAmountCart(panierId);
+        panierRepository.calcul_total_panier(panierId);
 
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("calcul_total_panier");
-        // Paramètres (si la procédure en a)
-        query.registerStoredProcedureParameter("panier_id", int.class, ParameterMode.IN);
-        query.setParameter("panier_id", panierId);
-
-        // Exécutez la procédure stockée
-        query.execute();
+//        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("calcul_total_panier");
+//        // Paramètres (si la procédure en a)
+//        query.registerStoredProcedureParameter("panier_id", int.class, ParameterMode.IN);
+//        query.setParameter("panier_id", panierId);
+//
+//        // Exécutez la procédure stockée
+//        query.execute();
 
         return newPanierDvdRepositoryModel != null;
     }

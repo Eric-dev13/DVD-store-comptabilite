@@ -12,11 +12,13 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Table(name = "panier")
-public class PanierRepositoryModel {
+public class
+PanierRepositoryModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "date")
     private LocalDateTime createdAt;
 
     private Float amount;
@@ -25,10 +27,6 @@ public class PanierRepositoryModel {
 
     @OneToMany(mappedBy = "panier", orphanRemoval = true)
     private List<PanierDvdRepositoryModel> dvds = new ArrayList<>();
-
-//    public PanierRepositoryModel(Long clientId) {
-//        this.clientId = clientId;
-//    }
 
     @PrePersist
     public void prePersist(){

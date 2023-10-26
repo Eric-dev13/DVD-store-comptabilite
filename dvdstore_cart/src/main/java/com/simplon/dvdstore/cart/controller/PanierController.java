@@ -10,6 +10,7 @@ import com.simplon.dvdstore.cart.repository.PanierRepositoryModel;
 import com.simplon.dvdstore.cart.service.PanierService;
 import com.simplon.dvdstore.cart.service.model.PanierDvdServiceModel;
 import com.simplon.dvdstore.cart.service.model.PanierServiceModel;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ public class PanierController {
 
     private final PanierService panierService;
     private final PanierRepository panierRepository;
+    private final HttpServletRequest request;
 
     // RETOURNE TOUS LES PANIERS
     @GetMapping
@@ -58,12 +60,5 @@ public class PanierController {
     public boolean deleteById(@PathVariable Long id){
         return panierService.deleteById(id);
     }
-
-
-
-
-
-
-
 
 }
