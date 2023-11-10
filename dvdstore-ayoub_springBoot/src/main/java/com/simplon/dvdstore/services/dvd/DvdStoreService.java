@@ -91,8 +91,13 @@ public class DvdStoreService {
     public boolean addDvd(DvdStoreServiceModel dvd) {
         DvdStoreRepositoryModel dvdStoreRepositoryModel = dvdServiceMapper.toRepositoryModel(dvd);
 
-       Object objet = dvdStoreRepository.save(dvdStoreRepositoryModel);
-       return objet != null;
+        if(dvd.getName() != null && dvd.getGenre() != null) {
+            Object objet = dvdStoreRepository.save(dvdStoreRepositoryModel);
+            return objet != null;
+        }
+        return false;
+
+
     }
 
     public boolean updateDvd(DvdStoreServiceModel dvd) {

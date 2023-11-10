@@ -33,7 +33,7 @@ public class DvdStoreServiceTest {
     DvdStoreService dvdStoreService;
 
     private DvdStoreServiceModel createDvdServiceModel(String name, String genre) {
-        DvdStoreServiceModel dvdStoreServiceModel =  new DvdStoreServiceModel();
+        DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel();
         dvdStoreServiceModel.setName(name);
         dvdStoreServiceModel.setGenre(genre);
         return dvdStoreServiceModel;
@@ -41,23 +41,23 @@ public class DvdStoreServiceTest {
 
 
     @Test
-    public void createDvd() throws Exception{
+    public void add_dvd_returns_true_if_property_name_and_property_genre_is_not_null() throws Exception{
         assertTrue( dvdStoreService.addDvd(createDvdServiceModel("titre","sci-fi")) );
     }
 
     @Test
-    public void addDvdNameReturnTrue() throws Exception{
-        assertTrue( dvdStoreService.addDvd(createDvdServiceModel(null,"sci-fi")) );
+    public void add_dvd_returns_false_if_property_name_is_null() throws Exception{
+        assertFalse( dvdStoreService.addDvd(createDvdServiceModel(null,"sci-fi")) );
     }
 
     @Test
-    public void addDvdGenreReturnTrue() throws Exception{
-        assertTrue( dvdStoreService.addDvd(createDvdServiceModel("titre",null)) );
+    public void add_dvd_returns_false_if_property_genre_is_null() throws Exception{
+        assertFalse( dvdStoreService.addDvd(createDvdServiceModel("titre",null)) );
     }
 
     @Test
-    public void addDvdGenreAndNameReturnTrue() throws Exception{
-        assertTrue( dvdStoreService.addDvd(createDvdServiceModel(null,null)) );
+    public void add_dvd_returns_false_if_property_name_and_property_genre_is_null() throws Exception{
+        assertFalse( dvdStoreService.addDvd(createDvdServiceModel(null,null)) );
     }
 
 }
