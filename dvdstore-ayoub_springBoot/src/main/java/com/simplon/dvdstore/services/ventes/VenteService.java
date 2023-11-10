@@ -7,29 +7,28 @@ import com.simplon.dvdstore.repositories.dvd.DvdStoreRepositoryModel;
 import com.simplon.dvdstore.repositories.ventes.VenteRepository;
 import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
 import com.simplon.dvdstore.services.clients.ClientServiceModel;
-import com.simplon.dvdstore.services.dvd.DvdServiceMapper;
 import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.simplon.dvdstore.services.dvd.DvdServiceMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
+@RequiredArgsConstructor
 @Service
 public class VenteService {
 
-    @Autowired
-    private VenteRepository venteRepository;
-    @Autowired
-    private ClientRepository clientRepository;
 
-    @Autowired
-    private  DvdRepository dvdRepository;
+    private final VenteRepository venteRepository;
+
+    private final ClientRepository clientRepository;
+
+    private final DvdRepository dvdRepository;
+
+    private final DvdServiceMapper dvdServiceMapper;
 
 
     public List<VenteServiceModel> findAll() {
@@ -49,7 +48,8 @@ public class VenteService {
             );
 
             // Mappage vente.dvd
-            DvdStoreServiceModel dvdStoreServiceModel = DvdServiceMapper.INSTANCE.DvdStoreRepositoryModelToDvdStoreServiceModel(venteRepositoryModel.getDvdStoreRepositoryModel());
+            DvdStoreServiceModel dvdStoreServiceModel = dvdServiceMapper.toServiceModel(venteRepositoryModel.getDvdStoreRepositoryModel());
+                    // DvdStoreServiceModel dvdStoreServiceModel = DvdServiceMapper.INSTANCE.DvdStoreRepositoryModelToDvdStoreServiceModel(venteRepositoryModel.getDvdStoreRepositoryModel());
 //            DvdStoreServiceModel dvdStoreServiceModel = new DvdStoreServiceModel(
 //                    Optional.ofNullable(venteRepositoryModel.getDvdStoreRepositoryModel().getId()),
 //                    venteRepositoryModel.getDvdStoreRepositoryModel().getName(),
@@ -80,7 +80,7 @@ public class VenteService {
 
         // Mappage DvdStoreServiceModel To DvdStoreRepositoryModel
         DvdStoreRepositoryModel dvdStoreRepositoryModel  = new DvdStoreRepositoryModel();
-        dvdStoreRepositoryModel.setId(venteServiceModel.getDvdStoreServiceModel().getId().get());
+        dvdStoreRepositoryModel.setId(venteServiceModel.getDvdStoreServiceModel().getId());
         // 2 requete dvd et client
         float price = 0.0f;
 
@@ -150,7 +150,8 @@ public class VenteService {
            );
 
            // Mapping vente.dvd
-           DvdStoreServiceModel dvdStoreServiceModel = DvdServiceMapper.INSTANCE.DvdStoreRepositoryModelToDvdStoreServiceModel(vente.getDvdStoreRepositoryModel());
+           DvdStoreServiceModel dvdStoreServiceModel = dvdServiceMapper.toServiceModel(vente.getDvdStoreRepositoryModel());
+           //DvdStoreServiceModel dvdStoreServiceModel = DvdServiceMapper.INSTANCE.DvdStoreRepositoryModelToDvdStoreServiceModel(vente.getDvdStoreRepositoryModel());
 
            //Mapping vente
           return new VenteServiceModel(

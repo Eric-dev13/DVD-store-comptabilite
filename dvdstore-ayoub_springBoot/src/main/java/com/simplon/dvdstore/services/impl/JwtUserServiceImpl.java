@@ -88,6 +88,7 @@ public class JwtUserServiceImpl implements JwtUserService {
     @Override
     public String generateJwtForUser(UserDetails user) {
         Date now = new Date();
+        // Date expiryDate = new Date(now.getTime() + 3600 * 1000);
         Date expiryDate = new Date(now.getTime() + 3600 * 1000);
         return
                 Jwts.builder().setSubject(user.getUsername())

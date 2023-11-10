@@ -2,7 +2,7 @@ package com.simplon.dvdstore.services.dvd;
 
 import com.simplon.dvdstore.repositories.dvd.DvdRepository;
 import com.simplon.dvdstore.repositories.dvd.DvdStoreRepositoryModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,45 +11,35 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@RequiredArgsConstructor
 @Service
 public class DvdStoreService {
 
-    @Autowired
-    private DvdRepository dvdStoreRepository;
+    private final DvdRepository dvdStoreRepository;
 
+    private final DvdServiceMapper dvdServiceMapper;
 
-    DvdServiceMapper dvdServiceMapper = DvdServiceMapper.INSTANCE;
 
     public List<DvdStoreServiceModel> findAll() {
         // Retourne un tableau
-        /*
-        var dvdStoreServiceModels = dvdStoreRepository.findAll().stream().map((value) -> dvdServiceMapper.DvdStoreRepositoryModelToDvdStoreServiceModel(value)).collect(Collectors.toList());
-        */
-        return dvdStoreRepository.findAll().stream().map(dvdServiceMapper::DvdStoreRepositoryModelToDvdStoreServiceModel).collect(Collectors.toList());
+       return  dvdStoreRepository.findAll().stream().map((value)-> dvdServiceMapper.toServiceModel(value)).collect(Collectors.toList());
     }
 
 
     public DvdStoreServiceModel finById(Long id) {
         Optional<DvdStoreRepositoryModel> dvdRepositoryModel = dvdStoreRepository.findById(id);
-
-        if(dvdRepositoryModel.isEmpty())
+        if(dvdRepositoryModel.isPresent())
         {
-            return null;
-        } else {
-            return dvdServiceMapper.DvdStoreRepositoryModelToDvdStoreServiceModel(dvdRepositoryModel.get());
+            return dvdServiceMapper.toServiceModel(dvdRepositoryModel.get());
         }
+        return null;
     }
 
-//    public boolean addDvdStore(DvdStoreServiceModel dvdStoreServiceModel) {
-//        DvdStoreRepositoryModel modelRepository = dvdServiceMapper.dvdStoreServiceModelToDvdStoreRepositoryModel(dvdStoreServiceModel);
-//        Object object = dvdStoreRepository.save(modelRepository);
-//        return object != null;
-//    }
 
     public boolean delete(Long id) {
         if(dvdStoreRepository.existsById(id)){
@@ -60,29 +50,15 @@ public class DvdStoreService {
     }
 
     public boolean put(DvdStoreServiceModel dvdStoreServiceModel) {
-        Long id = dvdStoreServiceModel.getId().get();
+        Long id = dvdStoreServiceModel.getId();
         if(dvdStoreRepository.existsById(id)){
-            DvdStoreRepositoryModel repositoryModel = dvdServiceMapper.dvdStoreServiceModelToDvdStoreRepositoryModel(dvdStoreServiceModel);
+            DvdStoreRepositoryModel repositoryModel = dvdServiceMapper.toRepositoryModel(dvdStoreServiceModel);
             Object object = dvdStoreRepository.save(repositoryModel);
             return object != null;
         }
         return false;
     }
 
-
-//    public boolean addDvd(MultipartFile mediaFile, String name, String genre, String realisateur, String acteur, int quantity, Float price, String synopsis) throws IOException {
-//        // Si un fichier a été envoyé.
-//        if(mediaFile != null) {
-//           if(this.fileUpload(mediaFile)){
-//               // PERSISTANCE DES DONNEES EN BDD
-//               return this.updateDvd(name, genre, realisateur, acteur, quantity, price, synopsis ,Optional.ofNullable(mediaFile.getOriginalFilename()));
-//           }
-//        } else {
-//            // PERSISTANCE DES DONNEES EN BDD
-//            return this.updateDvd(name, genre, realisateur, acteur, quantity, price, synopsis, Optional.empty());
-//        }
-//        return false;
-//    }
 
     public boolean fileUpload(MultipartFile mediaFile) throws IOException {
         /* ***************************************************** */
@@ -113,20 +89,14 @@ public class DvdStoreService {
     }
 
     public boolean addDvd(DvdStoreServiceModel dvd) {
-        /* ***************************************************** */
-        /*                PERSISTE LES DONNEES EN BDD            */
-        /* ***************************************************** */
-        DvdStoreRepositoryModel dvdStoreRepositoryModel = DvdServiceMapper.INSTANCE.dvdStoreServiceModelToDvdStoreRepositoryModel(dvd);
+        DvdStoreRepositoryModel dvdStoreRepositoryModel = dvdServiceMapper.toRepositoryModel(dvd);
 
-        Object objet = dvdStoreRepository.save(dvdStoreRepositoryModel);
-        return objet != null;
+       Object objet = dvdStoreRepository.save(dvdStoreRepositoryModel);
+       return objet != null;
     }
 
     public boolean updateDvd(DvdStoreServiceModel dvd) {
-        /* ***************************************************** */
-        /*                PERSISTE LES DONNEES EN BDD            */
-        /* ***************************************************** */
-        DvdStoreRepositoryModel dvdStoreRepositoryModel = DvdServiceMapper.INSTANCE.dvdStoreServiceModelToDvdStoreRepositoryModel(dvd);
+        DvdStoreRepositoryModel dvdStoreRepositoryModel = dvdServiceMapper.toRepositoryModel(dvd);
 
         Object objet = dvdStoreRepository.save(dvdStoreRepositoryModel);
         return objet != null;

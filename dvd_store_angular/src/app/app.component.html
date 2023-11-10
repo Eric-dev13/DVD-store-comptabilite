@@ -1,6 +1,13 @@
-<ion-app>
+<ion-app *ngIf="platform.is('android') || platform.is('ios')">
+    <span class="text-center">Android</span> 
     <app-navbar></app-navbar>
   <ion-content>
     <ion-router-outlet></ion-router-outlet>
   </ion-content>
 </ion-app>
+
+<main *ngIf="platform.is('desktop')" class="ion-page">
+  <span class="text-center">Desktop</span> 
+  <app-navbar></app-navbar>
+  <router-outlet ></router-outlet>
+</main>

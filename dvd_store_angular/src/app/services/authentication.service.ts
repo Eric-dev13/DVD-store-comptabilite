@@ -20,6 +20,7 @@ export class AuthenticationService {
       const token = sessionStorage.getItem('token');
       if(token){
         this.jwtTokenService.setToken(token)
+        
         console.log(this.jwtTokenService.isTokenExpired());
         
         return !this.jwtTokenService.isTokenExpired();

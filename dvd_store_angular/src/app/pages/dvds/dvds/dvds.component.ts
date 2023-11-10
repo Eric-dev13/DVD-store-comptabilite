@@ -4,6 +4,7 @@ import { DvdModel } from 'src/app/services/dvd-model.interface';
 import { environment } from 'src/environments/environment.development';
 import { faEdit, faTrash, faCircleInfo, faRotateLeft, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class DvdsComponent implements OnInit {
 
-  constructor(private dvdService: DvdService, private router: Router) { }
+  constructor(private dvdService: DvdService, private router: Router, public platform: Platform) { }
 
   faSquarePlus = faSquarePlus;
   faTrash = faTrash;
@@ -45,4 +46,7 @@ export class DvdsComponent implements OnInit {
       complete: () => console.log('Liste des DVDs récupèrée')
     })
   }
+
+
+
 }

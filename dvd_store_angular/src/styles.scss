@@ -41,12 +41,16 @@
 }
 
 
-h1,h5{
+h1,h5 {
     font-family: 'Playfair Display';
 }
 
 p{
     font-family: 'Roboto Condensed Regular';
+}
+
+.ion-page {
+     overflow-y: auto !important;
 }
 
 

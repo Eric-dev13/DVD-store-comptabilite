@@ -1,27 +1,26 @@
 package com.simplon.dvdstore.controllers.ventes;
 
 import com.simplon.dvdstore.controllers.clients.ClientGetDTO;
-import com.simplon.dvdstore.controllers.dvd.DvdDtoMapper;
 import com.simplon.dvdstore.controllers.dvd.DvdStoreGetDto;
+import com.simplon.dvdstore.controllers.dvd.DvdDtoMapper;
 import com.simplon.dvdstore.repositories.ventes.VenteRepository;
 import com.simplon.dvdstore.repositories.ventes.VenteRepositoryModel;
-import com.simplon.dvdstore.services.clients.ClientServiceModel;
-import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
 import com.simplon.dvdstore.services.ventes.VenteService;
 import com.simplon.dvdstore.services.ventes.VenteServiceMapper;
 import com.simplon.dvdstore.services.ventes.VenteServiceModel;
 import com.simplon.dvdstore.services.ventes.VenteServiceModelNoObject;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController // N'accepte que des données JSON ou XML
 @RequestMapping("api/vente")
+@RequiredArgsConstructor
 public class VenteController {
 
     @Autowired
@@ -29,6 +28,8 @@ public class VenteController {
 
     @Autowired
     private VenteRepository venteRepository;
+
+    private final DvdDtoMapper dvdStoreGetDtoMapper;
 
     @GetMapping
     public List<VenteGetDTO> findAll(){
@@ -49,9 +50,11 @@ public class VenteController {
             );
 
             // MapStruct pour les dvds
-            DvdStoreGetDto dvdStoreGetDto = DvdDtoMapper.INSTANCE.dvdServiceModelToDvdGetDTO(venteServiceModel.getDvdStoreServiceModel());
+            //DvdStoreGetDto dvdStoreGetDto = DvdDtoMapper.INSTANCE.dvdServiceModelToDvdGetDTO(venteServiceModel.getDvdStoreServiceModel());
 
-            // Mapping vente
+            DvdStoreGetDto dvdStoreGetDto = dvdStoreGetDtoMapper.toDto(venteServiceModel.getDvdStoreServiceModel());
+
+                    // Mapping vente
             venteGetDTOS.add(new VenteGetDTO(
                     venteServiceModel.getId().get(),
                     venteServiceModel.getDateAchat(),
@@ -78,7 +81,9 @@ public class VenteController {
             );
 
             // MapStruct pour les dvds
-            DvdStoreGetDto dvdStoreGetDto = DvdDtoMapper.INSTANCE.dvdServiceModelToDvdGetDTO(venteServiceModel.getDvdStoreServiceModel());
+            //DvdStoreGetDto dvdStoreGetDto = DvdDtoMapper.INSTANCE.dvdServiceModelToDvdGetDTO(venteServiceModel.getDvdStoreServiceModel());
+
+            DvdStoreGetDto dvdStoreGetDto = dvdStoreGetDtoMapper.toDto(venteServiceModel.getDvdStoreServiceModel());
 
             // Mapping vente
             VenteGetDTO venteGetDto =  new VenteGetDTO(
