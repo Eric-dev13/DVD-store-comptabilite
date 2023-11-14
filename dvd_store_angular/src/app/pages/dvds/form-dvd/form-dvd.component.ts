@@ -69,7 +69,6 @@ export class FormDvdComponent implements OnInit {
   send = (form: NgForm) => {
     // CREE UNE INSTANCE DE FORM DATA POUR PREPARER LA REQUETE MULTIPART
     //console.log(form.value)
-
     const formData: FormData = new FormData();
     formData.append('mediaFile', this.selectedFile);
     formData.append('name', form.value.name);

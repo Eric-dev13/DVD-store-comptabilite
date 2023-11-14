@@ -1,4 +1,4 @@
-package com.simplon.dvdstore.services.impl;
+package com.simplon.dvdstore.security;
 
 
 import com.simplon.dvdstore.domain.Owner;

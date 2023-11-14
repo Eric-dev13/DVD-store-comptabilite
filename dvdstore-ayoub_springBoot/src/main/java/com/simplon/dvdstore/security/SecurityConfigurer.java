@@ -37,7 +37,7 @@ public class SecurityConfigurer {
             .addFilterBefore(securityFilter(), UsernamePasswordAuthenticationFilter.class)
         .authorizeHttpRequests(a -> {
             a.requestMatchers("/api/**").authenticated();
-            //a.requestMatchers("/api/dvd/**").hasAuthority("ADMIN");
+            // a.requestMatchers("/api/dvd/**").hasAuthority("ADMIN"); // MARCHE PAS !!!
             a.anyRequest().permitAll();
         });
 

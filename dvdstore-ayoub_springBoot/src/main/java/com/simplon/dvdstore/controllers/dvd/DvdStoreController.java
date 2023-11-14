@@ -5,6 +5,7 @@ import com.simplon.dvdstore.services.dvd.DvdStoreService;
 import com.simplon.dvdstore.services.dvd.DvdStoreServiceModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController // N'accepte que des données JSON ou XML
 @RequiredArgsConstructor
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("api/dvd")
 public class DvdStoreController {
 

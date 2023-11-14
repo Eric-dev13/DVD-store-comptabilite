@@ -26,23 +26,32 @@ export class DvdComponent implements OnInit {
 
   id_dvd: any;
 
+
   ngOnInit(): void {
     this.id_dvd = this.route.snapshot.paramMap.get('id');
-
-    this.dvdService.findById(this.id_dvd).subscribe({
-      next: (data_dvd) => {
-        //console.log(data_dvd),
-        this.dvd = data_dvd
-      },
-      error: (err) => console.log('Observer got an error: ' + err),
-      complete: () => console.log('Liste des DVDs récupèrée')
-    })
+    this.findById(this.id_dvd);
+    
   }
 
-  delete = (id: any) => {
+  public delete = (id: any) => {
     this.dvdService.delete(id).subscribe((res) => {
       //console.log(res); 
     })
+  }
+
+  public findById = (id: any) => {
+    this.dvdService.findById(id).subscribe({
+      next: (data_dvd: DvdModel) => {
+        //console.log(data_dvd),
+        this.dvd = data_dvd
+      },
+      error: (err) => console.log('Erreur lors de la récupération du DVD :' + err),
+      complete: () => console.log('DVD récupéré')
+    })
+  }
+
+  public maFonction() {
+    return "Hello World!";
   }
   
 }

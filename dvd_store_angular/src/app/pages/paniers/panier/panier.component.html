@@ -1,0 +1,33 @@
+<div class="container p-3">
+    <div class="row">
+        <ul class="list-group mb-3">
+            <li class="list-group-item  text-bg-secondary">Panier crée le {{panier.createdAt | date:"dd/MM/yyyy"}}
+            </li>
+            <li class="list-group-item">Identifiant : {{panier.id}}</li>
+            <li class="list-group-item">Client : {{panier.client.firstname}} {{panier.client.lastname}}</li>
+            <li class="list-group-item">Montant : {{panier.amount}}</li>
+            <li class="list-group-item">Liste des articles
+                <div class="row" *ngFor="let dvd of panier.dvds">
+                    <div class="col-2">
+                        <img *ngIf="dvd.filename; else default" [src]="PUBLIC_URL_UPLOAD + dvd.filename"
+                            class="img-fluid shadow" alt="...">
+                        <ng-template #default>
+                            <img src="assets/empty_portrait.webp" class="img-fluid shadow" alt="...">
+                        </ng-template>
+                    </div>
+                    <div class="col">
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item">Nom: {{ dvd.name }}</li>
+                            <li class="list-group-item">Genre: {{ dvd.genre }}</li>
+                            <li class="list-group-item">Réalisateur: {{ dvd.realisateur }}</li>
+                            <li class="list-group-item">Acteur: {{ dvd.acteur }}</li>
+                            <li class="list-group-item">Quantité commandées : {{ dvd.quantity }}</li>
+                            <li class="list-group-item">Prix unitaire : {{ dvd.price }}</li>
+                            <li class="list-group-item">Synopsis : {{ dvd.synopsis }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

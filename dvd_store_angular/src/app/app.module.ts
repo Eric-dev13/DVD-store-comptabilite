@@ -31,7 +31,7 @@ import { PaniersComponent } from './pages/paniers/paniers/paniers.component';
 import { AddPanierComponent } from './pages/paniers/add-panier/add-panier.component';
 import { PanierComponent } from './pages/paniers/panier/panier.component';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { RouteReuseStrategy } from '@angular/router'
+import { RouteReuseStrategy } from '@angular/router';
 
 
 @NgModule({
