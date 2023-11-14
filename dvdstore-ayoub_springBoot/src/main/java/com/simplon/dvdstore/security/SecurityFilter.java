@@ -19,15 +19,16 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUserService jwtUserService;
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse
-            response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
+    ) throws ServletException, IOException {
         try {
             String header = request.getHeader("Authorization");
-// Authentification
-// Authorization: bearer eyolfdilfsdkfdslkflsdkfjjdslfhlsdfjlsdfjlk
             String incomingJwt = header.substring(7);
             UserDetails user = jwtUserService.getUserFromJwt(incomingJwt);
-// On le passe aux controllers grâce au context
+            // On le passe aux controllers grâce au context
             Authentication authentication = new
                     UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -38,5 +39,5 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
 }
-//Remarque : vérifie l'utilisateur associé à la requete HTTP et transmet le principal (le user) au reste de l'application via
-//le SecurityContextHolder
+// Remarque : vérifie l'utilisateur associé à la requete HTTP et transmet le principal (le user) au reste de l'application via
+// le SecurityContextHolder

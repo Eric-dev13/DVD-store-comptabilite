@@ -14,6 +14,9 @@ import { FormVenteComponent } from './pages/ventes/form-vente/form-vente.compone
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { authenticationGuard } from './helpers/authentication.guard';
+import { PaniersComponent } from './pages/paniers/paniers/paniers.component';
+import { PanierComponent } from './pages/paniers/panier/panier.component';
+
 
 const routes: Routes = [
   { path: "admin", component: DvdsComponent, canActivate: [authenticationGuard] }, // DVDS
@@ -31,7 +34,11 @@ const routes: Routes = [
   { path: "admin/vente/update/:id", component: FormVenteComponent, canActivate: [authenticationGuard] }, // put-update
 
   { path: "inscription", component: RegisterComponent },
-  { path: "login", component: LoginComponent }
+  { path: "login", component: LoginComponent },
+
+
+  { path: "paniers", component: PaniersComponent },
+  { path: "paniers/:id", component: PanierComponent }
 ];
 
 @NgModule({

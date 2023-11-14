@@ -69,6 +69,7 @@ export class FormClientComponent implements OnInit {
       // Mode Add
      // console.log("Add")
       this.clientService.add(form.value).subscribe((response) => {
+        // client a été ajouté je dois créer un panier
         this.router.navigate(["/clients"]);
         //console.log(response)
       });

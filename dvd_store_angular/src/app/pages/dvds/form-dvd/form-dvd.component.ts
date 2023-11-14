@@ -69,7 +69,6 @@ export class FormDvdComponent implements OnInit {
   send = (form: NgForm) => {
     // CREE UNE INSTANCE DE FORM DATA POUR PREPARER LA REQUETE MULTIPART
     //console.log(form.value)
-
     const formData: FormData = new FormData();
     formData.append('mediaFile', this.selectedFile);
     formData.append('name', form.value.name);
@@ -85,14 +84,14 @@ export class FormDvdComponent implements OnInit {
     //console.log(this.id)
     if (this.id != null) {
       // mode Update
-      //console.log("Update")
+      console.log("Update")
       this.dvdService.update(this.id, formData).subscribe((response) => {
         console.log(response)
         this.router.navigate(["/"]);
       });
     } else {
       // Mode Add
-      //console.log("Add")
+      console.log("Add")
       this.dvdService.add(formData).subscribe((response) => {
         console.log(response)
         this.router.navigate(["/"]);

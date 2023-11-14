@@ -27,7 +27,11 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { UnauthorizedComponent } from './error/unauthorized/unauthorized.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
-
+import { PaniersComponent } from './pages/paniers/paniers/paniers.component';
+import { AddPanierComponent } from './pages/paniers/add-panier/add-panier.component';
+import { PanierComponent } from './pages/paniers/panier/panier.component';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { RouteReuseStrategy } from '@angular/router';
 
 
 @NgModule({
@@ -47,7 +51,10 @@ import { NotFoundComponent } from './error/not-found/not-found.component';
     RegisterComponent,
     LoginComponent,
     UnauthorizedComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PaniersComponent,
+    AddPanierComponent,
+    PanierComponent
   ],
   imports: [
     FormsModule,
@@ -55,14 +62,19 @@ import { NotFoundComponent } from './error/not-found/not-found.component';
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    IonicModule.forRoot()
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-  }
+    },
+    {
+      provide: RouteReuseStrategy, 
+      useClass: IonicRouteStrategy 
+    }
   ],
   bootstrap: [AppComponent]
 })

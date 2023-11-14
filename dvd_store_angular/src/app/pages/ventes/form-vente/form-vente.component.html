@@ -1,35 +1,36 @@
-<div class="d-flex justify-content-center align-items-center">
-    <h1 class="fw-bold text-green">Ajouter / modifier VENTE</h1>
-</div>
-<div class="container py-3">
-    <form #form="ngForm" (submit)="send(form)" enctype="multipart/form-data">
 
-        <div class="mb-3">
-            <label for="client" class="form-label">Clients</label>
-            <select class="form-select" [(ngModel)]="vente.client" name="client" id="client">
-                <option *ngFor="let client of clients" [value]="client.id">{{client.lastname}}</option>
-            </select>
-        </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <h1 class="fw-bold text-green">Ajouter / modifier VENTE</h1>
+    </div>
+    <div class="container py-3">
+        <form #form="ngForm" (submit)="send(form)" enctype="multipart/form-data">
 
-        <div class="mb-3">
-            <label for="dvd" class="form-label">DVDs</label>
-            <select class="form-select" [(ngModel)]="vente.dvd" name="dvd" id="dvd">
-                <option *ngFor="let dvd of dvds" [value]="dvd.id">{{dvd.name}}, {{dvd.quantity}} en stock</option>
-            </select>
-        </div>
-        
-        <div class="mb-3">
-            <label for="acteur" class="form-label">Quantités</label>
-            <input [(ngModel)]="vente.quantity" name="quantity" type="number" class="form-control" id="quantity"
-                aria-describedby="acteur">
-        </div>
+            <div class="mb-3">
+                <label for="client" class="form-label">Clients</label>
+                <select class="form-select" [(ngModel)]="vente.client" name="client" id="client">
+                    <option *ngFor="let client of clients" [value]="client.id">{{client.lastname}}</option>
+                </select>
+            </div>
 
-        <!-- <div class="mb-3">
+            <div class="mb-3">
+                <label for="dvd" class="form-label">DVDs</label>
+                <select class="form-select" [(ngModel)]="vente.dvd" name="dvd" id="dvd">
+                    <option *ngFor="let dvd of dvds" [value]="dvd.id">{{dvd.name}}, {{dvd.quantity}} en stock</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="acteur" class="form-label">Quantités</label>
+                <input [(ngModel)]="vente.quantity" name="quantity" type="number" class="form-control" id="quantity"
+                    aria-describedby="acteur">
+            </div>
+
+            <!-- <div class="mb-3">
             <label for="date" class="form-label">Date de la vente</label>
             <input type="date" class="form-control" id="date"
                 aria-describedby="date">
         </div> -->
 
-        <button type="submit" class="btn text-light btn-blue">Ajouter</button>
-    </form>
-</div>
+            <button type="submit" class="btn text-light btn-blue">Ajouter</button>
+        </form>
+    </div>

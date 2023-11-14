@@ -8,6 +8,4 @@ import java.util.ArrayList;
 @Repository
 public interface DvdRepository extends CrudRepository<DvdStoreRepositoryModel, Long> {
     ArrayList<DvdStoreRepositoryModel> findAll();
-//    DvdStoreRepositoryModel findById();
-
 }
